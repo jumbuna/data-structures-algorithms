@@ -1,10 +1,16 @@
 #define __DEBUG
 #include "../include/poolallocator.h"
+#include <iostream>
 
 int main() {
-	allocator<long> allocator;
+	Allocator<long> allocator;
 	
 	auto r = allocator.create(500);
+	auto v = allocator.create(5005);
+	auto x = allocator.create(5050);
+	allocator.destroy(v);
+	auto w = allocator.create(505550);
 	
-	std::cout << *r ;
+	
+	std::cout << *v ;
 }
