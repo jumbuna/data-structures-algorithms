@@ -1,0 +1,30 @@
+#include "../include/HashMap.h"
+#include <iostream>
+#include <string>
+
+struct person {
+	char gender = 'M';
+	int age = 100;
+};
+
+int main() {
+	Map<std::string, person> map;
+	map["john"] = person{};
+	map["jane"].age = 20;
+	map.remove("jane");
+	map["joyce"].age = 54;
+	map["james"].age = 18;
+	map["jim"].age = 6;
+	map["joan"].age = 45;
+	map["jill"].age = 90;
+	
+	auto f = map;
+	
+	auto keys = f.keys();
+	
+	f["jill"].gender = 'F';
+	
+	for(int i = 0; i < keys.size(); i++) {
+		std::cout << f[keys[i]].gender << " -> " << map[keys[i]].gender << std::endl;
+	}
+}

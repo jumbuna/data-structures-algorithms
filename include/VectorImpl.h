@@ -18,7 +18,7 @@ void Vector<T, A>::newPool() {
 	//get the newly assigned pooladdres
 	void *newpoolAddress = newpool->poolAddress;
 	//move all contents from the old array to the new array(new pool address)
-	//i could actually use currentIndex insead of capacity here since th eobjects are stored continuously
+	//i could actually use currentIndex insead of capacity here since the objects are stored continuously
 	std::memmove(newpoolAddress, memoryPool->poolAddress, capacity/2*sizeof(T));
 	//free memory held by the now old array
 	memoryPool->~Pool();
@@ -36,6 +36,19 @@ Vector<T, A>::Vector(std::size_t capacity)
 :capacity(capacity), currentIndex(0), loadFactor(.75) {
 	threshold = capacity * loadFactor;
 	memoryPool = new MemoryPool<T>;
+}
+
+template<class T, class A>
+Vector<T, A>::Vector(Vector<T>& other)
+:loadFactor(0.75)
+{
+	memoryPool = new MemoryPool<T>;
+	threshold = other.threshold;
+	capacity = other.capacity;
+	currentIndex = other.currentIndex;
+	memoryPool->numberOfChunks = capacity;
+	memoryPool->allocate();
+	std::memcpy(memoryPool->poolAddress, other.memoryPool->poolAddress, capacity * sizeof(T));
 }
 
 template<class T, class A>

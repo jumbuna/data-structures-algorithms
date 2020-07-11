@@ -11,7 +11,7 @@ class Vector {
 	std::size_t currentIndex;
 	//the maximum number of items the array can actually hold
 	std::size_t capacity;
-	//threshold above which anew block is allocated to house the array
+	//threshold above which a new block is allocated to house the array
 	const double loadFactor;
 	std::size_t threshold;
 	//generate a new larger pool
@@ -21,6 +21,8 @@ public:
 	Vector();
 	//constructor user defined capacity
 	Vector(std::size_t);
+	//copy constructor
+	Vector(Vector<T>&);
 	//destructor
 	~Vector();
 	//add element to the array
