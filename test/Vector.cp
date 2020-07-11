@@ -2,7 +2,7 @@
 #include <iostream>
 
 int main() {
-	Vector<int> vector;
+	Vector<int> vector{4};
 	vector.push_back(10);
 	vector.push_back(20);
 	vector.push_back(30);
