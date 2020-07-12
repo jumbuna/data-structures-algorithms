@@ -34,7 +34,7 @@ public:
 	//return vector to initial state
 	void clear();
 	//free memory by returning unused memory back to the system
-	void shrinkToFit();
+	void shrinkToFit(bool force = false);
 	//search for and remove first instance of an element in the under-lying array
 	void remove(T);
 	//remove element at particular index

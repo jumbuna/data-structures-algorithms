@@ -86,8 +86,14 @@ void Vector<T, A>::clear() {
 }
 
 template<class T, class A>
-void Vector<T, A>::shrinkToFit() {
+void Vector<T, A>::shrinkToFit(bool force) {
 	//TODO resize pool to currentIndex+1
+	//shrink only when array is less than 75% full unless force is set to true
+	if((capacity * .75) > currentIndex || force) {
+		capacity = currentIndex + 1;
+		memoryPool->poolAddress = (T*) std::realloc(memoryPool->poolAddress, capacity * sizeof(T));
+		threshold = capacity * loadFactor;
+	}
 }
 
 template<class T, class A>
