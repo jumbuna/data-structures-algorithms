@@ -88,9 +88,9 @@ void MemoryPool<T, growthsize>::reset() {
 
 template<class T, std::size_t growthsize>
 template<typename ...Args>
-T* Allocator<T, growthsize>::create(Args ...args) {
+T* Allocator<T, growthsize>::create(Args&& ...args) {
 	//object construction
-	return new (MemoryPool<T, growthsize>::allocate()) T(std::forward<T>(args...));
+	return new (MemoryPool<T, growthsize>::allocate()) T(std::forward<Args>(args)...);
 }
 
 template<class T, std::size_t growthsize>

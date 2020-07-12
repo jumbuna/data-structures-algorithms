@@ -1,42 +1,40 @@
 #pragma once
 
-#include "PoolAllocator.h"
+#include "BinarySearchTreeNode.h"
 #include "Vector.h"
 #include "Queue.h"
-
-enum TraversalOrder {
-	IN, POST, PRE, LEVEL
-};
-
-template<class T>
-struct BstNode {
-	BstNode(T);
-	T element;
-	BstNode *leftChild;
-	BstNode *rightChild;
-};
+#include "BinarySearchTreeTraversals.h"
 
 template<class T>
 class BinarySearchTree {
+public:
 	using Node = BstNode<T>;
-	void insert(Node *&, Node *&, T&);
-	void removeNode(Node *&, Node *&, T&);
-	T& preOrderSuccessor(Node *&);
+	BinarySearchTree();
 	Node *root;
 	std::size_t nodeCount;
-	Allocator<Node, 128> nodeAllocator;
-	void inOrderTraversal(Node *, Vector<T> &);
-	void postOrderTraversal(Node *, Vector<T> &);
-	void preOrderTraversal(Node *, Vector<T> &);
-	void levelOrderTraversal(Node *, Vector<T> &);
-public:
-	BinarySearchTree(std::size_t);
-	BinarySearchTree();
-	void insert(T);
-	void remove(T);
-	bool contains(T);
-	std::size_t size();
-	Vector<T> treeTraversal(TraversalOrder = IN);
+	virtual void insert(T) = 0;
+	virtual void remove(T) = 0;
+	virtual bool contains(T)=0;
+	virtual Vector<T> treeTraversal(TraversalOrder)=0;
+	virtual std::size_t size() = 0;
 };
 
-#include "BinarySearchTreeImpl.h"
+template<class T>
+BinarySearchTree<T>::BinarySearchTree()
+:root(nullptr), nodeCount(0)
+{}
+
+//template<class T>
+//bool BinarySearchTree<T>::contains(T element) {
+//	return BstUtility<T>::contains(root, element);
+//}
+//
+//template<class T>
+//std::size_t BinarySearchTree<T>::size() {
+//	return nodeCount;
+//}
+//
+//template<class T>
+//Vector<T> BinarySearchTree<T>::treeTraversal(TraversalOrder order) {
+//	return BstUtility<T>::treeTraversal(root, order);
+//}

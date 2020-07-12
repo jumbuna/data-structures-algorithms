@@ -77,7 +77,7 @@ class Allocator: public MemoryPool<T, growthsize> {
 public:
 	//construct the object in a chunk and return the address
 	template<typename ...Args>
-	T *create(Args ...args);
+	T *create(Args&& ...args);
 	//add given address to the pools free list
 	void destroy(T *);
 	//reset the pool
