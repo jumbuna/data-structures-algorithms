@@ -73,7 +73,7 @@ public:
 
 //growthsize == numberOfchunks
 template<class T, std::size_t growthsize = 1024>
-class Allocator: private MemoryPool<T, growthsize> {
+class Allocator: public MemoryPool<T, growthsize> {
 public:
 	//construct the object in a chunk and return the address
 	template<typename ...Args>

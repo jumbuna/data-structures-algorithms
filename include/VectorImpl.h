@@ -47,8 +47,10 @@ Vector<T, A>::Vector(Vector<T>& other)
 	capacity = other.capacity;
 	currentIndex = other.currentIndex;
 	memoryPool->numberOfChunks = capacity;
-	memoryPool->allocate();
-	std::memcpy(memoryPool->poolAddress, other.memoryPool->poolAddress, capacity * sizeof(T));
+	if(other.memoryPool->poolAddress) {
+		memoryPool->allocate();
+		std::memcpy(memoryPool->poolAddress, other.memoryPool->poolAddress, capacity * sizeof(T));
+	}
 }
 
 template<class T, class A>
