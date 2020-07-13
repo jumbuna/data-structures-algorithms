@@ -1,8 +1,8 @@
-#include "../include/AvlTree.h"
+#include "../include/RedBlackTree.h"
 #include <iostream>
 
 int main() {
-	AvlTree<int> bst {5};
+	RedBlackTree<int> bst {10};
 	for(int i = 1; i < 11; i++) {
 		bst.insert(i);
 	}
