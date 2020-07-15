@@ -185,7 +185,7 @@ void AATree<T>::remove(T element) {
 
 template<class T>
 bool AATree<T>::contains(T element) {
-	return BstUtility<T>::contains(BinarySearchTree<T>::root, element);
+	return BstUtility<T>::contains(BinarySearchTree<T>::root, element) != nullptr;
 }
 
 template<class T>

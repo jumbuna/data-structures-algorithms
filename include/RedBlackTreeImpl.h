@@ -296,7 +296,7 @@ void RedBlackTree<T>::remove(T element) {
 
 template<class T>
 bool RedBlackTree<T>::contains(T element) {
-	return BstUtility<T>::contains(BinarySearchTree<T>::root, element, &leafSentinel);
+	return BstUtility<T>::contains(BinarySearchTree<T>::root, element, &leafSentinel) != &leafSentinel;
 }
 
 template<class T>

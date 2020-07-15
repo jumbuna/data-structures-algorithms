@@ -245,7 +245,7 @@ void AvlTree<T>::remove(T element) {
 
 template<class T>
 bool AvlTree<T>::contains(T element) {
-	return BstUtility<T>::contains(BinarySearchTree<T>::root, element);
+	return BstUtility<T>::contains(BinarySearchTree<T>::root, element) != nullptr;
 }
 
 template<class T>

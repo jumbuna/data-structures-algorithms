@@ -1,5 +1,6 @@
 #include "../include/AvlTree.h"
 #include "../include/AATree.h"
+#include "../include/SplayTree.h"
 #include "../include/RedBlackTree.h"
 #include "../include/UnbalancedBinarySearchTree.h"
 #include <iostream>
@@ -8,7 +9,8 @@ int main() {
 //	UnbalancedBinarySearchTree<int> tree {11};
 //	AvlTree<int> tree {11};
 //	RedBlackTree<int> tree {11};
-	AATree<int> tree {11};
+//	AATree<int> tree {11};
+	SplayTree<int> tree {11};
 	
 	BinarySearchTree<int> &bst = tree;
 	for(int i = 1; i < 11; i++) {

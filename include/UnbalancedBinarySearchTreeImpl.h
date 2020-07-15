@@ -104,7 +104,7 @@ void UnbalancedBinarySearchTree<T>::remove(T element) {
 
 template<class T>
 bool UnbalancedBinarySearchTree<T>::contains(T element) {
-	return BstUtility<T>::contains(BinarySearchTree<T>::root, element);
+	return BstUtility<T>::contains(BinarySearchTree<T>::root, element) != nullptr;
 }
 
 template<class T>
