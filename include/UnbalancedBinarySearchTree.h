@@ -5,7 +5,7 @@
 #include "BinarySearchTreeUtilities.h"
 
 template<class T>
-class UnbalancedBinarySearchTree: private BinarySearchTree<T> {
+class UnbalancedBinarySearchTree: public BinarySearchTree<T> {
 	using Node = BstNode<T>;
 	Allocator<Node> nodeAllocator;
 	void insert(Node *, Node *, T);

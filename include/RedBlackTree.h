@@ -19,7 +19,7 @@ struct RBNode: BstNode<T> {
 };
 
 template<class T>
-class RedBlackTree : private BinarySearchTree<T> {
+class RedBlackTree : public BinarySearchTree<T> {
 	using Node = BstNode<T>;
 	using RbNode = RBNode<T>;
 	Allocator<RbNode> nodeAllocator;

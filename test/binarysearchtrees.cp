@@ -1,8 +1,16 @@
+#include "../include/AvlTree.h"
+#include "../include/AATree.h"
 #include "../include/RedBlackTree.h"
+#include "../include/UnbalancedBinarySearchTree.h"
 #include <iostream>
 
 int main() {
-	RedBlackTree<int> bst {10};
+//	UnbalancedBinarySearchTree<int> tree {11};
+//	AvlTree<int> tree {11};
+//	RedBlackTree<int> tree {11};
+	AATree<int> tree {11};
+	
+	BinarySearchTree<int> &bst = tree;
 	for(int i = 1; i < 11; i++) {
 		bst.insert(i);
 	}

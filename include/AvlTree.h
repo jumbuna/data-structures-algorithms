@@ -15,7 +15,7 @@ struct AvlNode: BstNode<T> {
 };
 
 template<class T>
-class AvlTree: private BinarySearchTree<T> {
+class AvlTree: public BinarySearchTree<T> {
 	using AvlNode = AvlNode<T>;
 	using Node = BstNode<T>;
 	Allocator<AvlNode, 128> nodeAllocator;
