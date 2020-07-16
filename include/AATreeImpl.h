@@ -50,7 +50,7 @@ template<class T, class C>
 void AATree<T, C>::split(aaNode *candidate) {
 	if(rightHorizontalLinkExists(candidate)) {
 		aaNode *rightChild = candidate->getRightChild();
-		BstUtility<T>::rightRightCase(rightChild, this);
+		BstUtility<T, C>::rightRightCase(rightChild, this);
 		rightChild->level += 1;
 	}
 }
@@ -59,7 +59,7 @@ template<class T, class C>
 void AATree<T, C>::skew(aaNode *candidate) {
 	if(leftHorizontalLinkExists(candidate)) {
 		Node *leftChild = candidate->getLeftChild();
-		BstUtility<T>::leftLeftCase(leftChild, this);
+		BstUtility<T, C>::leftLeftCase(leftChild, this);
 	}
 }
 
@@ -129,7 +129,7 @@ void AATree<T, C>::remove(Node *candidate, T element) {
 			nodeAllocator.destroy(static_cast<aaNode*> (candidate));
 			return;
 		}else {
-			T successor = BstUtility<T>::preOrderSuccessor(candidate->leftChild);
+			T successor = BstUtility<T, C>::preOrderSuccessor(candidate->leftChild);
 			candidate->element = successor;
 			remove(candidate->leftChild, successor);
 		}
@@ -185,7 +185,7 @@ void AATree<T, C>::remove(T element) {
 
 template<class T, class C>
 bool AATree<T, C>::contains(T element) {
-	return BstUtility<T>::contains(BinarySearchTree<T, C>::root, element, this) != nullptr;
+	return BstUtility<T, C>::contains(BinarySearchTree<T, C>::root, element) != nullptr;
 }
 
 template<class T, class C>
@@ -195,5 +195,5 @@ std::size_t AATree<T, C>::size() {
 
 template<class T, class C>
 Vector<T> AATree<T, C>::treeTraversal(TraversalOrder order) {
-	return BstUtility<T>::treeTraversal(BinarySearchTree<T, C>::root, order);
+	return BstUtility<T, C>::treeTraversal(BinarySearchTree<T, C>::root, order);
 }

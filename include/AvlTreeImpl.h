@@ -84,7 +84,7 @@ void AvlTree<T, C>::remove(Node *candidate, T element) {
 			}
 			nodeAllocator.destroy(static_cast<AvlNode*>(candidate));
 		}else {
-			T successor = BstUtility<T>::preOrderSuccessor(candidate->leftChild);
+			T successor = BstUtility<T, C>::preOrderSuccessor(candidate->leftChild);
 			candidate->element = successor;
 			remove(candidate->leftChild, successor);
 		}
@@ -120,9 +120,9 @@ void AvlTree<T, C>::balance(AvlNode *candidate) {
 	if(candidate->balanceFactor == +2) {
 		AvlNode *leftChild = candidate->getLeftChild();
 		if(leftChild->balanceFactor == 1) {
-			BstUtility<T>::leftLeftCase(leftChild, this);
+			BstUtility<T, C>::leftLeftCase(leftChild, this);
 		}else if(leftChild->balanceFactor == -1) {
-			BstUtility<T>::leftRightCase(leftChild, this);
+			BstUtility<T, C>::leftRightCase(leftChild, this);
 		}
 //		updateBalanceFactor(candidate);
 	}
@@ -130,9 +130,9 @@ void AvlTree<T, C>::balance(AvlNode *candidate) {
 	if(candidate->balanceFactor == -2) {
 		AvlNode *rightChild = candidate->getRightChild();
 		if(rightChild->balanceFactor == 1) {
-			BstUtility<T>::rightLeftCase(rightChild, this);
+			BstUtility<T, C>::rightLeftCase(rightChild, this);
 		}else if(rightChild->balanceFactor == -1) {
-			BstUtility<T>::rightRightCase(rightChild, this);
+			BstUtility<T, C>::rightRightCase(rightChild, this);
 		}
 	}
 	
@@ -169,7 +169,7 @@ void AvlTree<T, C>::remove(T element) {
 
 template<class T, class C>
 bool AvlTree<T, C>::contains(T element) {
-	return BstUtility<T>::contains(BinarySearchTree<T, C>::root, element, this) != nullptr;
+	return BstUtility<T, C>::contains(BinarySearchTree<T, C>::root, element) != nullptr;
 }
 
 template<class T, class C>
@@ -179,5 +179,5 @@ std::size_t AvlTree<T, C>::size() {
 
 template<class T, class C>
 Vector<T> AvlTree<T, C>::treeTraversal(TraversalOrder order) {
-	return BstUtility<T>::treeTraversal(BinarySearchTree<T, C>::root, order);
+	return BstUtility<T, C>::treeTraversal(BinarySearchTree<T, C>::root, order);
 }

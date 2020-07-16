@@ -6,7 +6,7 @@
 #include "BinarySearchTreeTraversals.h"
 
 
-template<class T>
+template<class T,class C>
 class BstUtility {
 	using Node = BstNode<T>;
 public:
@@ -15,41 +15,45 @@ public:
 	static void postOrderTraversal(Node *, Vector<T> &, Node *);
 	static void preOrderTraversal(Node *, Vector<T> &, Node *);
 	static void levelOrderTraversal(Node *, Vector<T> &, Node *);
-	static Node *contains(Node *, T, BinarySearchTree<T> *, Node * = nullptr);
+	static Node *contains(Node *, T, Node * = nullptr);
 	static T preOrderSuccessor(Node *, Node * = nullptr);
 	static T postOrderSuccessor(Node *, Node * = nullptr);
-	static void leftRotation(Node *, BinarySearchTree<T> *, Node * = nullptr);
-	static void rightRotation(Node *, BinarySearchTree<T> *, Node * = nullptr);
-	static void leftLeftCase(Node *, BinarySearchTree<T> *, Node * = nullptr);
-	static void leftRightCase(Node *, BinarySearchTree<T> *, Node * = nullptr);
-	static void rightRightCase(Node *, BinarySearchTree<T> *, Node * = nullptr);
-	static void rightLeftCase(Node *, BinarySearchTree<T> *, Node * = nullptr);
+	static void leftRotation(Node *, BinarySearchTree<T, C> *, Node * = nullptr);
+	static void rightRotation(Node *, BinarySearchTree<T, C> *, Node * = nullptr);
+	static void leftLeftCase(Node *, BinarySearchTree<T, C> *, Node * = nullptr);
+	static void leftRightCase(Node *, BinarySearchTree<T, C> *, Node * = nullptr);
+	static void rightRightCase(Node *, BinarySearchTree<T, C> *, Node * = nullptr);
+	static void rightLeftCase(Node *, BinarySearchTree<T, C> *, Node * = nullptr);
+	static C comparator;
 };
 
-template<class T>
-Vector<T> BstUtility<T>::treeTraversal(Node *startingNode, TraversalOrder order, Node *leafSentinel) {
+template<class T, class C>
+C BstUtility<T, C>::comparator = C{};
+
+template<class T, class C>
+Vector<T> BstUtility<T, C>::treeTraversal(Node *startingNode, TraversalOrder order, Node *leafSentinel) {
 	Vector<T> vector {128};
 	if(startingNode == leafSentinel) {
 		return vector;
 	}
 	switch(order) {
 		case IN_ORDER:
-			BstUtility<T>::inOrderTraversal(startingNode, vector, leafSentinel);
+			BstUtility<T, C>::inOrderTraversal(startingNode, vector, leafSentinel);
 			break;
 		case POST_ORDER:
-			BstUtility<T>::postOrderTraversal(startingNode, vector, leafSentinel);
+			BstUtility<T, C>::postOrderTraversal(startingNode, vector, leafSentinel);
 			break;
 		case PRE_ORDER:
-			BstUtility<T>::preOrderTraversal(startingNode, vector, leafSentinel);
+			BstUtility<T, C>::preOrderTraversal(startingNode, vector, leafSentinel);
 			break;
 		case LEVEL_ORDER:
-			BstUtility<T>::levelOrderTraversal(startingNode, vector, leafSentinel);
+			BstUtility<T, C>::levelOrderTraversal(startingNode, vector, leafSentinel);
 	}
 	return vector;
 }
 
-template<class T>
-void BstUtility<T>::inOrderTraversal(Node *startingNode, Vector<T> &vector, Node *leafSentinel) {
+template<class T, class C>
+void BstUtility<T, C>::inOrderTraversal(Node *startingNode, Vector<T> &vector, Node *leafSentinel) {
 	if(startingNode != leafSentinel) {
 		inOrderTraversal(startingNode->leftChild, vector, leafSentinel);
 		vector.push_back(startingNode->element);
@@ -57,8 +61,8 @@ void BstUtility<T>::inOrderTraversal(Node *startingNode, Vector<T> &vector, Node
 	}
 }
 
-template<class T>
-void BstUtility<T>::postOrderTraversal(Node *startingNode, Vector<T> &vector, Node *leafSentinel) {
+template<class T, class C>
+void BstUtility<T, C>::postOrderTraversal(Node *startingNode, Vector<T> &vector, Node *leafSentinel) {
 	if(startingNode != leafSentinel) {
 		inOrderTraversal(startingNode->leftChild, vector, leafSentinel);
 		inOrderTraversal(startingNode->rightChild, vector, leafSentinel);
@@ -66,8 +70,8 @@ void BstUtility<T>::postOrderTraversal(Node *startingNode, Vector<T> &vector, No
 	}
 }
 
-template<class T>
-void BstUtility<T>::preOrderTraversal(Node *startingNode, Vector<T> &vector, Node *leafSentinel) {
+template<class T, class C>
+void BstUtility<T, C>::preOrderTraversal(Node *startingNode, Vector<T> &vector, Node *leafSentinel) {
 	if(startingNode != leafSentinel) {
 		vector.push_back(startingNode->element);
 		inOrderTraversal(startingNode->leftChild, vector, leafSentinel);
@@ -75,8 +79,8 @@ void BstUtility<T>::preOrderTraversal(Node *startingNode, Vector<T> &vector, Nod
 	}
 }
 
-template<class T>
-void BstUtility<T>::levelOrderTraversal(Node *startingtNode, Vector<T> &vector, Node *leafSentinel) {
+template<class T, class C>
+void BstUtility<T, C>::levelOrderTraversal(Node *startingtNode, Vector<T> &vector, Node *leafSentinel) {
 	if(startingtNode != leafSentinel) {
 		Queue<Node*> q;
 		q.push(startingtNode);
@@ -93,15 +97,15 @@ void BstUtility<T>::levelOrderTraversal(Node *startingtNode, Vector<T> &vector, 
 	}	
 }
 
-template<class T>
-BstNode<T>* BstUtility<T>::contains(Node *startingNode, T element, BinarySearchTree<T> *tree, Node *leafSentinel) {
+template<class T, class C>
+BstNode<T>* BstUtility<T, C>::contains(Node *startingNode, T element, Node *leafSentinel) {
 	if(startingNode != leafSentinel) {
 		Node *temp = startingNode;
 		while(temp != leafSentinel) {
 			if(temp->element == element) {
 				return temp;
 			}
-			if(tree->comparator(temp->element, element)) {
+			if(BstUtility<T, C>::comparator(temp->element, element)) {
 				temp = temp->leftChild;
 			}else {
 				temp = temp->rightChild;
@@ -111,24 +115,24 @@ BstNode<T>* BstUtility<T>::contains(Node *startingNode, T element, BinarySearchT
 	return leafSentinel;
 }
 
-template<class T>
-T BstUtility<T>::preOrderSuccessor(Node *startingNode, Node *leafSentinel) {
+template<class T, class C>
+T BstUtility<T, C>::preOrderSuccessor(Node *startingNode, Node *leafSentinel) {
 	while(startingNode->rightChild != leafSentinel) {
 		startingNode = startingNode->rightChild;
 	}
 	return startingNode->element;
 }
 
-template<class T>
-T BstUtility<T>::postOrderSuccessor(Node *startingNode, Node *leafSentinel) {
+template<class T, class C>
+T BstUtility<T, C>::postOrderSuccessor(Node *startingNode, Node *leafSentinel) {
 	while(startingNode->leftChild != leafSentinel) {
 		startingNode = startingNode->leftChild;
 	}
 	return startingNode->element;
 }
 
-template<class T>
-void BstUtility<T>::leftRotation(Node *candidate, BinarySearchTree<T> *tree, Node *leafSentinel) {
+template<class T, class C>
+void BstUtility<T, C>::leftRotation(Node *candidate, BinarySearchTree<T, C> *tree, Node *leafSentinel) {
 	Node *parent = candidate->parent;
 	Node *leftChild = candidate->leftChild;
 	Node *grandparent = parent->parent;
@@ -153,8 +157,8 @@ void BstUtility<T>::leftRotation(Node *candidate, BinarySearchTree<T> *tree, Nod
 	}
 }
 
-template<class T>
-void BstUtility<T>::rightRotation(Node *candidate, BinarySearchTree<T> *tree,  Node *leafSentinel) {
+template<class T, class C>
+void BstUtility<T, C>::rightRotation(Node *candidate, BinarySearchTree<T, C> *tree,  Node *leafSentinel) {
 	Node *parent = candidate->parent;
 	Node *rightChild = candidate->rightChild;
 	Node *grandParent = parent->parent;
@@ -179,26 +183,26 @@ void BstUtility<T>::rightRotation(Node *candidate, BinarySearchTree<T> *tree,  N
 	}
 }
 
-template<class T>
-void BstUtility<T>::leftLeftCase(Node *candidate, BinarySearchTree<T> *tree, Node *leafSentinel) {
-	BstUtility<T>::rightRotation(candidate, tree, leafSentinel);
+template<class T, class C>
+void BstUtility<T, C>::leftLeftCase(Node *candidate, BinarySearchTree<T, C> *tree, Node *leafSentinel) {
+	BstUtility<T, C>::rightRotation(candidate, tree, leafSentinel);
 }
 
-template<class T>
-void BstUtility<T>::leftRightCase(Node *candidate, BinarySearchTree<T> *tree, Node *leafSentinel) {
+template<class T, class C>
+void BstUtility<T, C>::leftRightCase(Node *candidate, BinarySearchTree<T, C> *tree, Node *leafSentinel) {
 	Node *rightChild = candidate->rightChild;
-	BstUtility<T>::leftRotation(rightChild, tree, leafSentinel);
-	BstUtility<T>::leftLeftCase(rightChild, tree, leafSentinel);
+	BstUtility<T, C>::leftRotation(rightChild, tree, leafSentinel);
+	BstUtility<T, C>::leftLeftCase(rightChild, tree, leafSentinel);
 }
 
-template<class T>
-void BstUtility<T>::rightRightCase(Node *candidate, BinarySearchTree<T> *tree, Node *leafSentinel) {
-	BstUtility<T>::leftRotation(candidate, tree, leafSentinel);
+template<class T, class C>
+void BstUtility<T, C>::rightRightCase(Node *candidate, BinarySearchTree<T, C> *tree, Node *leafSentinel) {
+	BstUtility<T, C>::leftRotation(candidate, tree, leafSentinel);
 }
 
-template<class T>
-void BstUtility<T>::rightLeftCase(Node *candidate, BinarySearchTree<T> *tree, Node *leafSentinel) {
+template<class T, class C>
+void BstUtility<T, C>::rightLeftCase(Node *candidate, BinarySearchTree<T, C> *tree, Node *leafSentinel) {
 	Node *leftChild = candidate->leftChild;
-	BstUtility<T>::rightRotation(leftChild, tree, leafSentinel);
-	BstUtility<T>::rightRightCase(leftChild, tree, leafSentinel);
+	BstUtility<T, C>::rightRotation(leftChild, tree, leafSentinel);
+	BstUtility<T, C>::rightRightCase(leftChild, tree, leafSentinel);
 }

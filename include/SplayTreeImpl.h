@@ -6,9 +6,9 @@ void SplayTree<T, C>::zigCase(Node *candidate) {
 		Node *parent = candidate->parent;
 		if(!parent->parent) {
 			if(parent->leftChild == candidate) {
-				BstUtility<T>::leftLeftCase(candidate, this);
+				BstUtility<T, C>::leftLeftCase(candidate, this);
 			}else {
-				BstUtility<T>::rightRightCase(candidate, this);
+				BstUtility<T, C>::rightRightCase(candidate, this);
 			}
 		}
 	}
@@ -21,11 +21,11 @@ void SplayTree<T, C>::zigZigCase(Node *candidate) {
 		Node *grandParent = parent->parent;
 		if(grandParent) {
 			if(grandParent->leftChild == parent && parent->leftChild == candidate) {
-				BstUtility<T>::leftLeftCase(parent, this);
-				BstUtility<T>::leftLeftCase(candidate, this);
+				BstUtility<T, C>::leftLeftCase(parent, this);
+				BstUtility<T, C>::leftLeftCase(candidate, this);
 			}else if(grandParent->rightChild == parent && parent->rightChild == candidate) {
-				BstUtility<T>::rightRightCase(parent, this);
-				BstUtility<T>::rightRightCase(candidate, this);
+				BstUtility<T, C>::rightRightCase(parent, this);
+				BstUtility<T, C>::rightRightCase(candidate, this);
 			}
 		}
 	}
@@ -39,11 +39,11 @@ void SplayTree<T, C>::zigZagCase(Node *candidate) {
 		Node *grandParent = parent->parent;
 		if(grandParent) {
 			if(grandParent->rightChild == parent && parent->leftChild == candidate) {
-				BstUtility<T>::leftLeftCase(candidate, this);
-				BstUtility<T>::rightRightCase(candidate, this);
+				BstUtility<T, C>::leftLeftCase(candidate, this);
+				BstUtility<T, C>::rightRightCase(candidate, this);
 			}else if(grandParent->leftChild == parent && parent->rightChild == candidate) {
-				BstUtility<T>::rightRightCase(candidate, this);
-				BstUtility<T>::leftLeftCase(candidate, this);
+				BstUtility<T, C>::rightRightCase(candidate, this);
+				BstUtility<T, C>::leftLeftCase(candidate, this);
 			}
 		}
 	}
@@ -60,7 +60,7 @@ void SplayTree<T, C>::splay(Node *candidate) {
 
 template<class T, class C>
 bool SplayTree<T, C>::find(T element) {
-	Node *elementNode = BstUtility<T>::contains(BinarySearchTree<T, C>::root, element, this);
+	Node *elementNode = BstUtility<T, C>::contains(BinarySearchTree<T, C>::root, element);
 	if(elementNode) {
 		splay(elementNode);
 		return true;
@@ -111,7 +111,7 @@ void SplayTree<T, C>::remove(Node *candidate, T element) {
 		}else {
 			leftChild->parent = nullptr;
 			BinarySearchTree<T, C>::root = leftChild;
-			T successor = BstUtility<T>::preOrderSuccessor(leftChild);
+			T successor = BstUtility<T, C>::preOrderSuccessor(leftChild);
 			find(successor);
 			BinarySearchTree<T, C>::root->rightChild = rightChild;
 			rightChild->parent = BinarySearchTree<T, C>::root;
@@ -154,5 +154,5 @@ std::size_t SplayTree<T, C>::size() {
 
 template<class T, class C>
 Vector<T> SplayTree<T, C>::treeTraversal(TraversalOrder order) {
-	return BstUtility<T>::treeTraversal(BinarySearchTree<T, C>::root, order);
+	return BstUtility<T, C>::treeTraversal(BinarySearchTree<T, C>::root, order);
 }

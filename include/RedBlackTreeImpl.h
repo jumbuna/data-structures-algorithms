@@ -97,21 +97,21 @@ void RedBlackTree<T, C>::insertCaseFour(RbNode *candidate, RbNode *parent) {
 	RbNode *grandParent = parent->getParent();
 	if(grandParent->getLeftChild() == parent) {
 		if(candidate == parent->getLeftChild()) {
-			BstUtility<T>::leftLeftCase(parent, this);
+			BstUtility<T, C>::leftLeftCase(parent, this);
 			parent->color = BLACK;
 			grandParent->color = RED;
 		}else {
-			BstUtility<T>::leftRightCase(parent, this);
+			BstUtility<T, C>::leftRightCase(parent, this);
 			candidate->color = BLACK;
 			grandParent->color = RED;
 		}
 	}else {
 		if(candidate == parent->getRightChild()) {
-			BstUtility<T>::rightRightCase(parent, this);
+			BstUtility<T, C>::rightRightCase(parent, this);
 			parent->color = BLACK;
 			grandParent->color = RED;
 		}else {
-			BstUtility<T>::rightLeftCase(parent, this);
+			BstUtility<T, C>::rightLeftCase(parent, this);
 			candidate->color = BLACK;
 			grandParent->color = RED;
 		}
@@ -166,7 +166,7 @@ void RedBlackTree<T, C>::remove(RbNode *candidate, T element) {
 		rightChild->parent = parent;
 		nodeAllocator.destroy(candidate);
 	}else {
-		T successor = BstUtility<T>::preOrderSuccessor(candidate->leftChild, &leafSentinel);
+		T successor = BstUtility<T, C>::preOrderSuccessor(candidate->leftChild, &leafSentinel);
 		candidate->element = successor;
 		remove(candidate->getLeftChild(), successor);
 	}
@@ -187,9 +187,9 @@ void RedBlackTree<T, C>::deleteCaseTwo(RbNode *doubleBlackNode) {
 	RbNode *sibling = parent->getLeftChild() == doubleBlackNode ? parent->getRightChild() : parent->getLeftChild();
 	if(sibling->color == RED) {
 		if(sibling == parent->getLeftChild()) {
-			BstUtility<T>::leftLeftCase(sibling, this, &leafSentinel);
+			BstUtility<T, C>::leftLeftCase(sibling, this, &leafSentinel);
 		}else {
-			BstUtility<T>::rightRightCase(sibling, this, &leafSentinel);
+			BstUtility<T, C>::rightRightCase(sibling, this, &leafSentinel);
 		}
 		parent->color = RED;
 		sibling->color = BLACK;
@@ -233,13 +233,13 @@ void RedBlackTree<T, C>::deleteCaseFive(RbNode *doubleBlackNode) {
 	RbNode *rightNephew = sibling->getRightChild();
 	if(parent->getLeftChild() == sibling) {
 		if(rightNephew->color == RED) {
-			BstUtility<T>::rightRightCase(rightNephew, this);
+			BstUtility<T, C>::rightRightCase(rightNephew, this);
 			rightNephew->color = BLACK;
 			sibling->color = RED;
 		}
 	}else {
 		if(leftNephew->color == RED) {
-			BstUtility<T>::leftLeftCase(leftNephew, this);
+			BstUtility<T, C>::leftLeftCase(leftNephew, this);
 			leftNephew->color = BLACK;
 			sibling->color = RED;
 		}
@@ -255,14 +255,14 @@ void RedBlackTree<T, C>::deleteCaseSix(RbNode *doubleBlackNode) {
 	RbNode *rightNephew = sibling->getRightChild();
 	if(parent->getLeftChild() == sibling) {
 		if(leftNephew->color == RED) {
-			BstUtility<T>::leftLeftCase(sibling, this);
+			BstUtility<T, C>::leftLeftCase(sibling, this);
 			sibling->color = parent->color;
 			parent->color = BLACK;
 			leftNephew->color = BLACK;
 		}
 	}else {
 		if(rightNephew->color == RED) {
-			BstUtility<T>::rightRightCase(sibling, this);
+			BstUtility<T, C>::rightRightCase(sibling, this);
 			sibling->color = parent->color;
 			parent->color = BLACK;
 			rightNephew->color = BLACK;
@@ -296,7 +296,7 @@ void RedBlackTree<T, C>::remove(T element) {
 
 template<class T, class C>
 bool RedBlackTree<T, C>::contains(T element) {
-	return BstUtility<T>::contains(BinarySearchTree<T, C>::root, element, this, &leafSentinel) != &leafSentinel;
+	return BstUtility<T, C>::contains(BinarySearchTree<T, C>::root, element, &leafSentinel) != &leafSentinel;
 }
 
 template<class T, class C>
@@ -306,5 +306,5 @@ std::size_t RedBlackTree<T, C>::size() {
 
 template<class T, class C>
 Vector<T> RedBlackTree<T, C>::treeTraversal(TraversalOrder order) {
-	return BstUtility<T>::treeTraversal(BinarySearchTree<T, C>::root, order, &leafSentinel);
+	return BstUtility<T, C>::treeTraversal(BinarySearchTree<T, C>::root, order, &leafSentinel);
 }

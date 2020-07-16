@@ -5,6 +5,13 @@
 #include "../include/UnbalancedBinarySearchTree.h"
 #include <iostream>
 
+struct comp {
+	bool operator()(int x, int y) {
+		std::cout << "called";
+		return x>y;
+	}
+};
+
 int main() {
 //	UnbalancedBinarySearchTree<int> tree {11};
 //	AvlTree<int> tree {11};

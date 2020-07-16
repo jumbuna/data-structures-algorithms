@@ -68,7 +68,7 @@ void UnbalancedBinarySearchTree<T, C>::removeNode(Node *candidate, T element) {
 		}
 		nodeAllocator.destroy(candidate);
 	}else {
-		T successor = BstUtility<T>::preOrderSuccessor(candidate->leftChild);
+		T successor = BstUtility<T, C>::preOrderSuccessor(candidate->leftChild);
 		candidate->element = successor;
 		removeNode(candidate->leftChild, successor);
 	}	
@@ -104,7 +104,7 @@ void UnbalancedBinarySearchTree<T, C>::remove(T element) {
 
 template<class T, class C>
 bool UnbalancedBinarySearchTree<T, C>::contains(T element) {
-	return BstUtility<T>::contains(BinarySearchTree<T, C>::root, element, this) != nullptr;
+	return BstUtility<T, C>::contains(BinarySearchTree<T, C>::root, element) != nullptr;
 }
 
 template<class T, class C>
@@ -114,5 +114,5 @@ std::size_t UnbalancedBinarySearchTree<T, C>::size() {
 
 template<class T, class C>
 Vector<T> UnbalancedBinarySearchTree<T, C>::treeTraversal(TraversalOrder order) {
-	return BstUtility<T>::treeTraversal(BinarySearchTree<T, C>::root, order);
+	return BstUtility<T, C>::treeTraversal(BinarySearchTree<T, C>::root, order);
 }
