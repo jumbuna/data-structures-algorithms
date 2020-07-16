@@ -28,7 +28,7 @@ public:
 	//add element to the array
 	void push_back(T);
 	//get index of element in the array or -1 if absent
-	std::size_t indexOf(T);
+	int indexOf(T);
 	//access aray elements
 	T& operator[](std::size_t);
 	//return vector to initial state

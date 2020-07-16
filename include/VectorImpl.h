@@ -75,6 +75,16 @@ void Vector<T, A>::push_back(T element) {
 }
 
 template<class T, class A>
+int Vector<T, A>::indexOf(T element) {
+	for(int i = 0; i < currentIndex; i++) {
+		if(memoryPool->poolAddress[i] == element) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+template<class T, class A>
 T& Vector<T, A>::operator[](std::size_t elementIndex) {
 	//TODO implement a check to make sure given index is below the currentIndex
 	return memoryPool->poolAddress[elementIndex];
@@ -100,7 +110,7 @@ void Vector<T, A>::shrinkToFit(bool force) {
 
 template<class T, class A>
 void Vector<T, A>::remove(T element) {
-	std::size_t index = indexOf(element);
+	int index = indexOf(element);
 	if(index != -1) {
 		--currentIndex;
 		for(int i = index; i < currentIndex; i++) {
