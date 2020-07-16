@@ -18,8 +18,8 @@ struct RBNode: BstNode<T> {
 	RBNode *getParent();
 };
 
-template<class T>
-class RedBlackTree : public BinarySearchTree<T> {
+template<class T, class C = std::greater<T>>
+class RedBlackTree : public BinarySearchTree<T, C> {
 	using Node = BstNode<T>;
 	using RbNode = RBNode<T>;
 	Allocator<RbNode> nodeAllocator;

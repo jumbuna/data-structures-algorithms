@@ -4,8 +4,8 @@
 #include "BinarySearchTreeNode.h"
 #include "BinarySearchTreeUtilities.h"
 
-template<class T>
-class UnbalancedBinarySearchTree: public BinarySearchTree<T> {
+template<class T, class C = std::greater<T>>
+class UnbalancedBinarySearchTree: public BinarySearchTree<T, C> {
 	using Node = BstNode<T>;
 	Allocator<Node> nodeAllocator;
 	void insert(Node *, Node *, T);

@@ -15,8 +15,9 @@ public:
 	static void postOrderTraversal(Node *, Vector<T> &, Node *);
 	static void preOrderTraversal(Node *, Vector<T> &, Node *);
 	static void levelOrderTraversal(Node *, Vector<T> &, Node *);
-	static Node *contains(Node *, T, Node * = nullptr);
+	static Node *contains(Node *, T, BinarySearchTree<T> *, Node * = nullptr);
 	static T preOrderSuccessor(Node *, Node * = nullptr);
+	static T postOrderSuccessor(Node *, Node * = nullptr);
 	static void leftRotation(Node *, BinarySearchTree<T> *, Node * = nullptr);
 	static void rightRotation(Node *, BinarySearchTree<T> *, Node * = nullptr);
 	static void leftLeftCase(Node *, BinarySearchTree<T> *, Node * = nullptr);
@@ -93,14 +94,14 @@ void BstUtility<T>::levelOrderTraversal(Node *startingtNode, Vector<T> &vector, 
 }
 
 template<class T>
-BstNode<T>* BstUtility<T>::contains(Node *startingNode, T element, Node *leafSentinel) {
+BstNode<T>* BstUtility<T>::contains(Node *startingNode, T element, BinarySearchTree<T> *tree, Node *leafSentinel) {
 	if(startingNode != leafSentinel) {
 		Node *temp = startingNode;
 		while(temp != leafSentinel) {
 			if(temp->element == element) {
 				return temp;
 			}
-			if(temp->element > element) {
+			if(tree->comparator(temp->element, element)) {
 				temp = temp->leftChild;
 			}else {
 				temp = temp->rightChild;
@@ -114,6 +115,14 @@ template<class T>
 T BstUtility<T>::preOrderSuccessor(Node *startingNode, Node *leafSentinel) {
 	while(startingNode->rightChild != leafSentinel) {
 		startingNode = startingNode->rightChild;
+	}
+	return startingNode->element;
+}
+
+template<class T>
+T BstUtility<T>::postOrderSuccessor(Node *startingNode, Node *leafSentinel) {
+	while(startingNode->leftChild != leafSentinel) {
+		startingNode = startingNode->leftChild;
 	}
 	return startingNode->element;
 }

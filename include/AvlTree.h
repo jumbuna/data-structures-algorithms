@@ -14,8 +14,8 @@ struct AvlNode: BstNode<T> {
 	AvlNode *getParent();
 };
 
-template<class T>
-class AvlTree: public BinarySearchTree<T> {
+template<class T, class C = std::greater<T>>
+class AvlTree: public BinarySearchTree<T, C> {
 	using AvlNode = AvlNode<T>;
 	using Node = BstNode<T>;
 	Allocator<AvlNode, 128> nodeAllocator;

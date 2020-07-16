@@ -4,8 +4,8 @@
 #include "BinarySearchTree.h"
 #include "BinarySearchTreeUtilities.h"
 
-template<class T>
-class SplayTree : public BinarySearchTree<T> {
+template<class T, class C = std::greater<T>>
+class SplayTree : public BinarySearchTree<T, C> {
 	using Node = BstNode<T>;
 	Allocator<Node> nodeAllocator;
 	void zigCase(Node *);

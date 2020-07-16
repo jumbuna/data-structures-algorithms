@@ -1,14 +1,14 @@
 #include "UnbalancedBinarySearchTree.h"
 
-template<class T>
-void UnbalancedBinarySearchTree<T>::insert(Node *candidate, Node *parent, T element) {
+template<class T, class C>
+void UnbalancedBinarySearchTree<T, C>::insert(Node *candidate, Node *parent, T element) {
 	if(!candidate && !parent) {
-		BinarySearchTree<T>::root = nodeAllocator.create(element, parent);
+		BinarySearchTree<T, C>::root = nodeAllocator.create(element, parent);
 		return;
 	}
 	
 	if(!candidate) {
-		if(parent->element > element) {
+		if(BinarySearchTree<T, C>::comparator(parent->element, element)) {
 			parent->leftChild = nodeAllocator.create(element, parent);
 		}else {
 			parent->rightChild = nodeAllocator.create(element, parent);
@@ -16,20 +16,20 @@ void UnbalancedBinarySearchTree<T>::insert(Node *candidate, Node *parent, T elem
 		return;
 	}
 	
-	if(candidate->element > element) {
+	if(BinarySearchTree<T, C>::comparator(candidate->element, element)) {
 		insert(candidate->leftChild, candidate, element);
 	}else {
 		insert(candidate->rightChild, candidate, element);
 	}
 }
 
-template<class T>
-void UnbalancedBinarySearchTree<T>::removeNode(Node *candidate, T element) {
+template<class T, class C>
+void UnbalancedBinarySearchTree<T, C>::removeNode(Node *candidate, T element) {
 	if(!candidate) {
 		return;
 	}
 	if(candidate->element != element) {
-		if(candidate->element > element) {
+		if(BinarySearchTree<T, C>::comparator(candidate->element, element)) {
 			removeNode(candidate->leftChild, element);
 		}else {
 			removeNode(candidate->rightChild, element);
@@ -46,7 +46,7 @@ void UnbalancedBinarySearchTree<T>::removeNode(Node *candidate, T element) {
 				parent->rightChild = leftChild;
 			}
 		}else {
-			BinarySearchTree<T>::root = leftChild;
+			BinarySearchTree<T, C>::root = leftChild;
 		}
 		if(leftChild) {
 			leftChild->parent = parent;
@@ -61,7 +61,7 @@ void UnbalancedBinarySearchTree<T>::removeNode(Node *candidate, T element) {
 				parent->rightChild = rightChild;
 			}
 		}else {
-			BinarySearchTree<T>::root = rightChild;
+			BinarySearchTree<T, C>::root = rightChild;
 		}
 		if(rightChild) {
 			rightChild->parent = parent;
@@ -74,45 +74,45 @@ void UnbalancedBinarySearchTree<T>::removeNode(Node *candidate, T element) {
 	}	
 }
 
-template<class T>
-UnbalancedBinarySearchTree<T>::UnbalancedBinarySearchTree(std::size_t noOfElements)
-:BinarySearchTree<T>()
+template<class T, class C>
+UnbalancedBinarySearchTree<T, C>::UnbalancedBinarySearchTree(std::size_t noOfElements)
+:BinarySearchTree<T, C>()
 {
 	nodeAllocator.numberOfChunks = noOfElements;
 }
 
-template<class T>
-UnbalancedBinarySearchTree<T>::UnbalancedBinarySearchTree()
-:BinarySearchTree<T>()
+template<class T, class C>
+UnbalancedBinarySearchTree<T, C>::UnbalancedBinarySearchTree()
+:BinarySearchTree<T, C>()
 {}
 
-template<class T>
-void UnbalancedBinarySearchTree<T>::insert(T element) {
-	insert(BinarySearchTree<T>::root, BinarySearchTree<T>::root, element);
-	++BinarySearchTree<T>::nodeCount;
+template<class T, class C>
+void UnbalancedBinarySearchTree<T, C>::insert(T element) {
+	insert(BinarySearchTree<T, C>::root, BinarySearchTree<T, C>::root, element);
+	++BinarySearchTree<T, C>::nodeCount;
 }
 
-template<class T>
-void UnbalancedBinarySearchTree<T>::remove(T element) {
+template<class T, class C>
+void UnbalancedBinarySearchTree<T, C>::remove(T element) {
 	if(contains(element)) {
-		removeNode(BinarySearchTree<T>::root, element);
-		if(--BinarySearchTree<T>::nodeCount == 0) {
-			BinarySearchTree<T>::root = nullptr;
+		removeNode(BinarySearchTree<T, C>::root, element);
+		if(--BinarySearchTree<T, C>::nodeCount == 0) {
+			BinarySearchTree<T, C>::root = nullptr;
 		}
 	}
 }
 
-template<class T>
-bool UnbalancedBinarySearchTree<T>::contains(T element) {
-	return BstUtility<T>::contains(BinarySearchTree<T>::root, element) != nullptr;
+template<class T, class C>
+bool UnbalancedBinarySearchTree<T, C>::contains(T element) {
+	return BstUtility<T>::contains(BinarySearchTree<T, C>::root, element, this) != nullptr;
 }
 
-template<class T>
-std::size_t UnbalancedBinarySearchTree<T>::size() {
-	return BinarySearchTree<T>::nodeCount;
+template<class T, class C>
+std::size_t UnbalancedBinarySearchTree<T, C>::size() {
+	return BinarySearchTree<T, C>::nodeCount;
 }
 
-template<class T>
-Vector<T> UnbalancedBinarySearchTree<T>::treeTraversal(TraversalOrder order) {
-	return BstUtility<T>::treeTraversal(BinarySearchTree<T>::root, order);
+template<class T, class C>
+Vector<T> UnbalancedBinarySearchTree<T, C>::treeTraversal(TraversalOrder order) {
+	return BstUtility<T>::treeTraversal(BinarySearchTree<T, C>::root, order);
 }

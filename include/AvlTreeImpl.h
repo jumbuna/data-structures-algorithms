@@ -23,15 +23,15 @@ AvlNode<T>* AvlNode<T>::getParent() {
 }
 
 
-template<class T>
-void AvlTree<T>::insert(Node *candidate, Node *parent, T element) {
+template<class T, class C>
+void AvlTree<T, C>::insert(Node *candidate, Node *parent, T element) {
 	if(!candidate && !parent) {
-		BinarySearchTree<T>::root = nodeAllocator.create(element, static_cast<AvlNode*>(parent));
+		BinarySearchTree<T, C>::root = nodeAllocator.create(element, static_cast<AvlNode*>(parent));
 		return;
 	}
 	
 	if(!candidate) {
-		if(parent->element > element) {
+		if(BinarySearchTree<T, C>::comparator(parent->element, element)) {
 			parent->leftChild = nodeAllocator.create(element, static_cast<AvlNode*>(parent));
 		}else {
 			parent->rightChild = nodeAllocator.create(element, static_cast<AvlNode*>(parent));
@@ -39,7 +39,7 @@ void AvlTree<T>::insert(Node *candidate, Node *parent, T element) {
 		return;
 	}
 	
-	if(candidate->element > element) {
+	if(BinarySearchTree<T, C>::comparator(candidate->element, element)) {
 		insert(candidate->leftChild, candidate, element);
 	}else {
 		insert(candidate->rightChild, candidate, element);
@@ -49,8 +49,8 @@ void AvlTree<T>::insert(Node *candidate, Node *parent, T element) {
 	balance(static_cast<AvlNode*>(candidate));
 }
 
-template<class T>
-void AvlTree<T>::remove(Node *candidate, T element) {
+template<class T, class C>
+void AvlTree<T, C>::remove(Node *candidate, T element) {
 	if(!candidate) {
 		return;
 	}
@@ -89,7 +89,7 @@ void AvlTree<T>::remove(Node *candidate, T element) {
 			remove(candidate->leftChild, successor);
 		}
 	} else {
-		if(candidate->element > element) {
+		if(BinarySearchTree<T, C>::comparator(candidate->element, element)) {
 			remove(candidate->leftChild, element);
 		}else {
 			remove(candidate->rightChild, element);
@@ -99,84 +99,8 @@ void AvlTree<T>::remove(Node *candidate, T element) {
 	balance(static_cast<AvlNode*>(candidate));
 }
 
-//template<class T>
-//void AvlTree<T>::leftRotation(Node *candidate) {
-//	Node *parent = candidate->parent;
-//	Node *leftChild = candidate->getLeftChild();
-//	Node *grandparent = candidate->parent;
-//	
-//	parent->rightChild = leftChild;
-//	candidate->leftChild = parent;
-//	
-//	parent->parent = candidate;
-//	candidate->parent = grandparent;
-//	
-//	if(leftChild) {
-//		leftChild->parent = parent;
-//	}
-//	if(grandparent) {
-//		if(grandparent->getLeftChild() == parent) {
-//			grandparent->leftChild = candidate;
-//		}else {
-//			grandparent->rightChild = candidate;
-//		}
-//	}else {
-//		root = candidate;
-//	}
-//}
-
-//template<class T>
-//void AvlTree<T>::rightRotation(Node *candidate) {
-//	Node *parent = candidate->parent;
-//	Node *rightChild = candidate->rightChild;
-//	Node *grandaParent = parent->parent;
-//	
-//	candidate->rightChild = parent;
-//	parent->leftChild = rightChild;
-//	
-//	parent->parent = candidate;
-//	candidate->parent = grandaParent;
-//	
-//	if(rightChild) {
-//		rightChild->parent = parent;
-//	}
-//	if(grandaParent) {
-//		if(grandaParent->getLeftChild() == parent) {
-//			grandaParent->leftChild = candidate;
-//		}else {
-//			grandaParent->rightChild = candidate;
-//		}
-//	}else {
-//		root = candidate;
-//	}
-//}
-
-//template<class T>
-//void AvlTree<T>::leftLeftCase(Node *candidate) {
-//	rightRotation(candidate);
-//}
-//
-//template<class T>
-//void AvlTree<T>::leftRightCase(Node *candidate) {
-//	Node *rightChild = candidate->getRightChild();
-//	leftRotation(rightChild);
-//	leftLeftCase(rightChild);
-//}
-//
-//template<class T>
-//void AvlTree<T>::rightRightCase(Node *candidate) {
-//	leftRotation(candidate);
-//}
-//
-//template<class T>
-//void AvlTree<T>::rightLeftCase(Node *candidate) {
-//	Node *leftChild = candidate->getLeftChild();
-//	rightRotation(leftChild);
-//	rightRightCase(leftChild);
-//}
-
-template<class T>
-void AvlTree<T>::updateBalanceFactor(AvlNode *candidate) {
+template<class T, class C>
+void AvlTree<T, C>::updateBalanceFactor(AvlNode *candidate) {
 	int leftHeight , rightHeight;
 	leftHeight = rightHeight = -1;
 	if(candidate->getLeftChild()) {
@@ -191,8 +115,8 @@ void AvlTree<T>::updateBalanceFactor(AvlNode *candidate) {
 	candidate->height = 1 + std::max(leftHeight, rightHeight);
 }
 
-template<class T>
-void AvlTree<T>::balance(AvlNode *candidate) {
+template<class T, class C>
+void AvlTree<T, C>::balance(AvlNode *candidate) {
 	if(candidate->balanceFactor == +2) {
 		AvlNode *leftChild = candidate->getLeftChild();
 		if(leftChild->balanceFactor == 1) {
@@ -215,45 +139,45 @@ void AvlTree<T>::balance(AvlNode *candidate) {
 	updateBalanceFactor(candidate);
 }
 
-template<class T>
-AvlTree<T>::AvlTree(std::size_t noOfElements)
-:BinarySearchTree<T>()
+template<class T, class C>
+AvlTree<T, C>::AvlTree(std::size_t noOfElements)
+:BinarySearchTree<T, C>()
 {
 	nodeAllocator.numberOfChunks = noOfElements;
 }
 
-template<class T>
-AvlTree<T>::AvlTree()
-:BinarySearchTree<T>()
+template<class T, class C>
+AvlTree<T, C>::AvlTree()
+:BinarySearchTree<T, C>()
 {}
 
-template<class T>
-void AvlTree<T>::insert(T element) {
-	insert(BinarySearchTree<T>::root, BinarySearchTree<T>::root, element);
-	++BinarySearchTree<T>::nodeCount;
+template<class T, class C>
+void AvlTree<T, C>::insert(T element) {
+	insert(BinarySearchTree<T, C>::root, BinarySearchTree<T, C>::root, element);
+	++BinarySearchTree<T, C>::nodeCount;
 }
 
-template<class T>
-void AvlTree<T>::remove(T element) {
+template<class T, class C>
+void AvlTree<T, C>::remove(T element) {
 	if(contains(element)) {
-		remove(BinarySearchTree<T>::root, element);
-		if(--BinarySearchTree<T>::nodeCount == 0) {
-			BinarySearchTree<T>::root = nullptr;
+		remove(BinarySearchTree<T, C>::root, element);
+		if(--BinarySearchTree<T, C>::nodeCount == 0) {
+			BinarySearchTree<T, C>::root = nullptr;
 		}
 	}
 }
 
-template<class T>
-bool AvlTree<T>::contains(T element) {
-	return BstUtility<T>::contains(BinarySearchTree<T>::root, element) != nullptr;
+template<class T, class C>
+bool AvlTree<T, C>::contains(T element) {
+	return BstUtility<T>::contains(BinarySearchTree<T, C>::root, element, this) != nullptr;
 }
 
-template<class T>
-std::size_t AvlTree<T>::size() {
-	return BinarySearchTree<T>::nodeCount;
+template<class T, class C>
+std::size_t AvlTree<T, C>::size() {
+	return BinarySearchTree<T, C>::nodeCount;
 }
 
-template<class T>
-Vector<T> AvlTree<T>::treeTraversal(TraversalOrder order) {
-	return BstUtility<T>::treeTraversal(BinarySearchTree<T>::root, order);
+template<class T, class C>
+Vector<T> AvlTree<T, C>::treeTraversal(TraversalOrder order) {
+	return BstUtility<T>::treeTraversal(BinarySearchTree<T, C>::root, order);
 }

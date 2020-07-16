@@ -13,8 +13,8 @@ struct AANode : BstNode<T> {
 	AANode *getParent();
 };
 
-template<class T>
-class AATree : public BinarySearchTree<T> {
+template<class T, class C = std::greater<T>>
+class AATree : public BinarySearchTree<T, C> {
 	using Node = BstNode<T>;
 	using aaNode = AANode<T>;
 	Allocator<aaNode> nodeAllocator;

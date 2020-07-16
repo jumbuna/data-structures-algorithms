@@ -4,14 +4,16 @@
 #include "Vector.h"
 #include "Queue.h"
 #include "BinarySearchTreeTraversals.h"
+#include <algorithm>
 
-template<class T>
+template<class T, class C = std::greater<T>>
 class BinarySearchTree {
 public:
 	using Node = BstNode<T>;
 	BinarySearchTree();
 	Node *root;
 	std::size_t nodeCount;
+	C comparator;
 	virtual void insert(T) = 0;
 	virtual void remove(T) = 0;
 	virtual bool contains(T)=0;
@@ -19,22 +21,7 @@ public:
 	virtual std::size_t size() = 0;
 };
 
-template<class T>
-BinarySearchTree<T>::BinarySearchTree()
+template<class T, class C>
+BinarySearchTree<T, C>::BinarySearchTree()
 :root(nullptr), nodeCount(0)
 {}
-
-//template<class T>
-//bool BinarySearchTree<T>::contains(T element) {
-//	return BstUtility<T>::contains(root, element);
-//}
-//
-//template<class T>
-//std::size_t BinarySearchTree<T>::size() {
-//	return nodeCount;
-//}
-//
-//template<class T>
-//Vector<T> BinarySearchTree<T>::treeTraversal(TraversalOrder order) {
-//	return BstUtility<T>::treeTraversal(root, order);
-//}

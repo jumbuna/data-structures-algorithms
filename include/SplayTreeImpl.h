@@ -1,8 +1,8 @@
 #include "SplayTree.h"
 
-template<class T>
-void SplayTree<T>::zigCase(Node *candidate) {
-	if(candidate != BinarySearchTree<T>::root) {
+template<class T, class C>
+void SplayTree<T, C>::zigCase(Node *candidate) {
+	if(candidate != BinarySearchTree<T, C>::root) {
 		Node *parent = candidate->parent;
 		if(!parent->parent) {
 			if(parent->leftChild == candidate) {
@@ -14,9 +14,9 @@ void SplayTree<T>::zigCase(Node *candidate) {
 	}
 }
 
-template<class T>
-void SplayTree<T>::zigZigCase(Node *candidate) {
-	if(candidate != BinarySearchTree<T>::root) {
+template<class T, class C>
+void SplayTree<T, C>::zigZigCase(Node *candidate) {
+	if(candidate != BinarySearchTree<T, C>::root) {
 		Node *parent = candidate->parent;
 		Node *grandParent = parent->parent;
 		if(grandParent) {
@@ -32,9 +32,9 @@ void SplayTree<T>::zigZigCase(Node *candidate) {
 }
 
 
-template<class T>
-void SplayTree<T>::zigZagCase(Node *candidate) {
-	if(candidate != BinarySearchTree<T>::root) {
+template<class T, class C>
+void SplayTree<T, C>::zigZagCase(Node *candidate) {
+	if(candidate != BinarySearchTree<T, C>::root) {
 		Node *parent = candidate->parent;
 		Node *grandParent = parent->parent;
 		if(grandParent) {
@@ -49,18 +49,18 @@ void SplayTree<T>::zigZagCase(Node *candidate) {
 	}
 }
 
-template<class T>
-void SplayTree<T>::splay(Node *candidate) {
-	while(candidate != BinarySearchTree<T>::root) {
+template<class T, class C>
+void SplayTree<T, C>::splay(Node *candidate) {
+	while(candidate != BinarySearchTree<T, C>::root) {
 		zigCase(candidate);
 		zigZigCase(candidate);
 		zigZagCase(candidate);
 	}
 }
 
-template<class T>
-bool SplayTree<T>::find(T element) {
-	Node *elementNode = BstUtility<T>::contains(BinarySearchTree<T>::root, element);
+template<class T, class C>
+bool SplayTree<T, C>::find(T element) {
+	Node *elementNode = BstUtility<T>::contains(BinarySearchTree<T, C>::root, element, this);
 	if(elementNode) {
 		splay(elementNode);
 		return true;
@@ -68,16 +68,16 @@ bool SplayTree<T>::find(T element) {
 	return false;
 }
 
-template<class T>
-void SplayTree<T>::insert(Node *candidate, Node *parent, T element) {
+template<class T, class C>
+void SplayTree<T, C>::insert(Node *candidate, Node *parent, T element) {
 	if(!candidate && !parent) {
-		BinarySearchTree<T>::root = nodeAllocator.create(element, parent);
+		BinarySearchTree<T, C>::root = nodeAllocator.create(element, parent);
 		return;
 	}
 	
 	if(!candidate) {
 		candidate = nodeAllocator.create(element, parent);
-		if(parent->element > element) {
+		if(BinarySearchTree<T, C>::comparator(parent->element, element)) {
 			parent->leftChild = candidate;
 		}else {
 			parent->rightChild = candidate;
@@ -86,73 +86,73 @@ void SplayTree<T>::insert(Node *candidate, Node *parent, T element) {
 		return;
 	}
 	
-	if(candidate->element > element) {
+	if(BinarySearchTree<T, C>::comparator(candidate->element, element)) {
 		insert(candidate->leftChild, candidate, element);
 	}else {
 		insert(candidate->rightChild, candidate, element);
 	}
 }
 
-template<class T>
-void SplayTree<T>::remove(Node *candidate, T element) {
-	if(BinarySearchTree<T>::root == candidate) {
+template<class T, class C>
+void SplayTree<T, C>::remove(Node *candidate, T element) {
+	if(BinarySearchTree<T, C>::root == candidate) {
 		Node *leftChild = candidate->leftChild;
 		Node *rightChild = candidate->rightChild;
 		if(!rightChild) {
-			BinarySearchTree<T>::root = leftChild;
+			BinarySearchTree<T, C>::root = leftChild;
 			if(leftChild) {
 				leftChild->parent = nullptr;
 			}
 		}else if(!leftChild) {
-			BinarySearchTree<T>::root = rightChild;
+			BinarySearchTree<T, C>::root = rightChild;
 			if(rightChild) {
 				rightChild->parent = nullptr;
 			}
 		}else {
 			leftChild->parent = nullptr;
-			BinarySearchTree<T>::root = leftChild;
+			BinarySearchTree<T, C>::root = leftChild;
 			T successor = BstUtility<T>::preOrderSuccessor(leftChild);
 			find(successor);
-			BinarySearchTree<T>::root->rightChild = rightChild;
-			rightChild->parent = BinarySearchTree<T>::root;
+			BinarySearchTree<T, C>::root->rightChild = rightChild;
+			rightChild->parent = BinarySearchTree<T, C>::root;
 		}
 	}
 }
 
-template<class T>
-SplayTree<T>::SplayTree(std::size_t noOfElements)
-:BinarySearchTree<T> ()
+template<class T, class C>
+SplayTree<T, C>::SplayTree(std::size_t noOfElements)
+:BinarySearchTree<T, C> ()
 {
 	nodeAllocator.numberOfChunks = noOfElements;
 }
 
-template<class T>
-void SplayTree<T>::insert(T element) {
+template<class T, class C>
+void SplayTree<T, C>::insert(T element) {
 	if(!find(element)) {
-		insert(BinarySearchTree<T>::root, BinarySearchTree<T>::root, element);
-		++BinarySearchTree<T>::nodeCount;
+		insert(BinarySearchTree<T, C>::root, BinarySearchTree<T, C>::root, element);
+		++BinarySearchTree<T, C>::nodeCount;
 	}
 }
 
-template<class T>
-void SplayTree<T>::remove(T element) {
+template<class T, class C>
+void SplayTree<T, C>::remove(T element) {
 	if(find(element)) {
-		remove(BinarySearchTree<T>::root, element);
-		--BinarySearchTree<T>::nodeCount;
+		remove(BinarySearchTree<T, C>::root, element);
+		--BinarySearchTree<T, C>::nodeCount;
 	}
 }
 
-template<class T>
-bool SplayTree<T>::contains(T element) {
+template<class T, class C>
+bool SplayTree<T, C>::contains(T element) {
 	return find(element);
 }
 
-template<class T>
-std::size_t SplayTree<T>::size() {
-	return BinarySearchTree<T>::nodeCount;
+template<class T, class C>
+std::size_t SplayTree<T, C>::size() {
+	return BinarySearchTree<T, C>::nodeCount;
 }
 
-template<class T>
-Vector<T> SplayTree<T>::treeTraversal(TraversalOrder order) {
-	return BstUtility<T>::treeTraversal(BinarySearchTree<T>::root, order);
+template<class T, class C>
+Vector<T> SplayTree<T, C>::treeTraversal(TraversalOrder order) {
+	return BstUtility<T>::treeTraversal(BinarySearchTree<T, C>::root, order);
 }
