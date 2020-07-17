@@ -27,6 +27,7 @@ public:
 	~Vector();
 	//add element to the array
 	void push_back(T);
+	void append(Vector<T> *);
 	//get index of element in the array or -1 if absent
 	int indexOf(T);
 	//access aray elements

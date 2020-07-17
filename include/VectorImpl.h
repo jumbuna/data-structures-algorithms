@@ -75,6 +75,25 @@ void Vector<T, A>::push_back(T element) {
 }
 
 template<class T, class A>
+void Vector<T, A>::append(Vector<T> *other) {
+	if(other->size() == 0) {
+		return;
+	}
+	if(other->size()+currentIndex < threshold) {
+		if(!memoryPool->poolAddress) {
+			memoryPool->allocate();
+		}
+		Pool<T> *mpool = other->memoryPool;
+		std::memcpy(memoryPool->poolAddress+currentIndex, mpool->poolAddress, other->size() *sizeof(T));
+		currentIndex += other->size();
+		return;
+	}
+	for(int i = 0; i < other->size(); i++) {
+		push_back(other->operator[](i));
+	}
+}
+
+template<class T, class A>
 int Vector<T, A>::indexOf(T element) {
 	for(int i = 0; i < currentIndex; i++) {
 		if(memoryPool->poolAddress[i] == element) {

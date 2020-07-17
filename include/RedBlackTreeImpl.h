@@ -276,6 +276,7 @@ RedBlackTree<T, C>::RedBlackTree(std::size_t noOfElements)
 {
 	nodeAllocator.numberOfChunks = noOfElements;
 	BinarySearchTree<T, C>::root = &leafSentinel;
+	BinarySearchTree<T, C>::leafSentinel = &leafSentinel;
 }
 
 template<class T, class C>
@@ -307,4 +308,13 @@ std::size_t RedBlackTree<T, C>::size() {
 template<class T, class C>
 Vector<T> RedBlackTree<T, C>::treeTraversal(TraversalOrder order) {
 	return BstUtility<T, C>::treeTraversal(BinarySearchTree<T, C>::root, order, &leafSentinel);
+}
+
+template<class T, class C>
+void RedBlackTree<T, C>::clear() {
+	if(size() > 0) {
+		nodeAllocator.reset();
+	}
+	BinarySearchTree<T, C>::root = &leafSentinel;
+	BinarySearchTree<T, C>::nodeCount = 0;
 }

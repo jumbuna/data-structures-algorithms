@@ -31,6 +31,7 @@ public:
 	virtual bool contains(T) override;
 	virtual std::size_t size() override;
 	virtual Vector<T> treeTraversal(TraversalOrder = IN_ORDER) override;
+	virtual void clear() override;
 };
 
 #include "AvlTreeImpl.h"

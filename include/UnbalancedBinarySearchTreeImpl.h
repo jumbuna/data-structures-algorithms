@@ -116,3 +116,10 @@ template<class T, class C>
 Vector<T> UnbalancedBinarySearchTree<T, C>::treeTraversal(TraversalOrder order) {
 	return BstUtility<T, C>::treeTraversal(BinarySearchTree<T, C>::root, order);
 }
+
+template<class T, class C>
+void UnbalancedBinarySearchTree<T, C>::clear() {
+	nodeAllocator.Pool<T>::reset();
+	BinarySearchTree<T, C>::root = nullptr;
+	BinarySearchTree<T, C>::nodeCount = 0;
+}
