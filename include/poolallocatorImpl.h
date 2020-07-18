@@ -76,6 +76,7 @@ void MemoryPool<T, growthsize>::deallocate(T *recycle) {
 template<class T, std::size_t growthsize>
 void MemoryPool<T, growthsize>::reset() {
 	//clear all buffers except for the initial one
+	if(!allocatingbuffer) return;
 	while (allocatingbuffer->nextbuffer) {
 		buffer *temp = allocatingbuffer;
 		allocatingbuffer = allocatingbuffer->nextbuffer;
