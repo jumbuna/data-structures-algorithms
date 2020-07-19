@@ -184,7 +184,7 @@ Vector<T> AvlTree<T, C>::treeTraversal(TraversalOrder order) {
 
 template<class T, class C>
 void AvlTree<T, C>::clear() {
-	nodeAllocator.Pool<T>::reset();
+	nodeAllocator.reset();
 	BinarySearchTree<T, C>::root = nullptr;
 	BinarySearchTree<T, C>::nodeCount = 0;
 }

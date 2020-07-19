@@ -43,12 +43,12 @@ class BpTree {
 	using Node = BpTreeNode<K, V, C, B>;
 	using Util = Utility<K, V, C, B>;
 	Allocator<Node> nodeAllocator;
-	void borrowKeyFromLeftLeafNode(Node *);
-	void borrowKeyFromRightLeafNode(Node *);
-	void borrowKeyFromLeftInternalNode(Node *);
-	void borrowKeyFromRightInternalNode(Node *);
+	void borrowKeyFromLeftLeafNode(Node *, Node *);
+	void borrowKeyFromRightLeafNode(Node *, Node *);
+	void borrowKeyFromLeftInternalNode(Node *, Node *, K);
+	void borrowKeyFromRightInternalNode(Node *, Node *, K);
 	void mergeLeafNodes(Node *, Node *);
-	void mergeInternalNodes(Node *, Node *);
+	void mergeInternalNodes(Node *, Node *, K);
 	void postInsertLeafNode(Node *);
 	void postInsertInternalNode(Node *);
 	Node *postRemoveLeafNode(Node *);
@@ -60,7 +60,7 @@ class BpTree {
 	void internalNodeRemoveCaseTwo(Node *, Vector<K> &, Vector<Node*> &);
 	void internalNodeRemoveCaseThree(Node *, Vector<K> &, Vector<Node*> &);
 	void insert(Node *, K, V);
-	void remove(Node *, Node *, K);
+	void remove(Node *, K);
 	Node *root;
 	size_t keyCount;
 	size_t treeOrder;

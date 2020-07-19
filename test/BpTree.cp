@@ -1,11 +1,9 @@
 #include "../include/BpTree.h"
+#include "../include/AATree.h"
 #include <iostream>
 
 int main() {
-	BpTree<int, int> tree{3};
-//	for(int i = 1; i < 10; i++) {
-//		tree.insert(i, i);
-//	}
+	BpTree<int, int, std::greater<int>, AATree<int>> tree{5};
 	tree.insert(30);
 	tree.insert(96);
 	tree.insert(25);
@@ -22,13 +20,13 @@ int main() {
 	tree.insert(9);
 	tree.insert(6);
 	tree.insert(2);
-//	tree.remove(6);
-//	tree.remove(4);
-//	tree.remove(3);
-//	tree.remove(10);
-//	tree.remove(11);
-//	tree.remove(9);
-//	tree.remove(7);
+	tree.remove(44);
+	tree.remove(21);
+	tree.remove(98);
+	tree.remove(25);
+	tree.remove(6);
+	tree.remove(15);
+	tree.remove(30);
 //	tree.remove(2);
 //	tree.remove(5);
 //	tree.remove(8);
