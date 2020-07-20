@@ -201,6 +201,9 @@ void Map<K, V>::clear() {
 template<class K, class V>
 Vector<K> Map<K, V>::keys() {
 	Vector<K> vector {nodeCount};
+	if(size() == 0) {
+		return vector;
+	}
 	for(std::size_t i = 0; i < currentCapacity; i++) {
 		if(!memoryPool->poolAddress[i].free && !memoryPool->poolAddress[i].tombstone) {
 			vector.push_back(memoryPool->poolAddress[i].key);
