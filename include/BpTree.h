@@ -61,16 +61,17 @@ class BpTree {
 	void internalNodeRemoveCaseThree(Node *, Vector<K> &, Vector<Node*> &);
 	void insert(Node *, K, V);
 	void remove(Node *, K);
-	Node *root;
+	Node *root, *firstLeaf;
 	size_t keyCount;
 	size_t treeOrder;
 public:
 	BpTree(size_t = 5);
-	void insert(K, V=12);
+	void insert(K, V);
 	void remove(K);
 	bool contains(K);
 	size_t size();
 	Vector<K> treeTraversal(TraversalOrder = IN_ORDER);
+	Vector<std::pair<K, V>> KeyValuePairs();
 };
 
 #include "BpTreeImpl.h"

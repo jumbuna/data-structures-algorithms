@@ -65,6 +65,8 @@ void AvlTree<T, C>::remove(Node *candidate, T element) {
 				}else {
 					parent->rightChild = leftChild;
 				}
+			}else{
+				BinarySearchTree<T, C>::root = leftChild;
 			}
 			if(leftChild) {
 				leftChild->parent = parent;
@@ -78,6 +80,8 @@ void AvlTree<T, C>::remove(Node *candidate, T element) {
 				}else {
 					parent->rightChild = rightChild;
 				}
+			}else {
+				BinarySearchTree<T, C>::root = rightChild;
 			}
 			if(rightChild) {
 				rightChild->parent = parent;

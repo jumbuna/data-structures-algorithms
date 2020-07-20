@@ -14,10 +14,10 @@ struct comp {
 
 int main() {
 //	UnbalancedBinarySearchTree<int> tree {11};
-//	AvlTree<int> tree {11};
+	AvlTree<int> tree {3};
 //	RedBlackTree<int> tree {11};
 //	AATree<int> tree {11};
-	SplayTree<int> tree {11};
+//	SplayTree<int> tree {11};
 	
 	BinarySearchTree<int> &bst = tree;
 	for(int i = 1; i < 11; i++) {
@@ -31,8 +31,10 @@ int main() {
 	bst.remove(2);
 	bst.remove(1);
 	bst.remove(6);
+	bst.remove(9);
+	bst.remove(3);
 	
-	auto in = bst.treeTraversal();
+	auto in = bst.treeTraversal(LEVEL_ORDER);
 	
 	for(int i = 0; i < in.size(); i++) {
 		std::cout << in[i] << std::endl;

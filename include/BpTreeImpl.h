@@ -74,6 +74,7 @@ void BpTree<K, V, C, B>::insert(Node *candidate, K key, V value) {
 	if(!candidate) {
 		root = nodeAllocator.create(nullptr, treeOrder);
 		root->insertData(key, value);
+		firstLeaf = root;
 		return;
 	}
 	
@@ -113,6 +114,9 @@ void BpTree<K, V, C, B>::postInsertLeafNode(Node *candidate) {
 		}
 		if(candidate->nextNode) {
 			(*candidate->nextNode).previousNode = rightChild;
+		}
+		if(candidate == firstLeaf) {
+			firstLeaf = leftChild;
 		}
 		
 		if(parent == candidate) {
@@ -410,7 +414,7 @@ void BpTree<K, V, C, B>::mergeInternalNodes(Node *candidate, Node *sibling, K pa
 
 template<class K , class V, class C, class B>
 BpTree<K, V, C, B>::BpTree(size_t order)
-:treeOrder(order), root(nullptr), keyCount(0)
+:treeOrder(order), root(nullptr), keyCount(0), firstLeaf(nullptr)
 {
 	nodeAllocator.numberOfChunks = 128;
 }
@@ -466,6 +470,23 @@ Vector<K> BpTree<K, V, C, B>::treeTraversal(TraversalOrder order) {
 		Vector<K> keys = temp->keys.treeTraversal();
 		vector.append(&keys);
 		vector.push_back(0);
+	}
+	return vector;
+}
+
+template<class K, class V, class C, class B>
+Vector<std::pair<K, V>> BpTree<K, V, C, B>::KeyValuePairs() {
+	Vector<std::pair<K, V>> vector;
+	if(firstLeaf == nullptr) {
+		return vector;
+	}
+	Node *temp = firstLeaf;
+	while(temp) {
+		Vector<K> keys = temp->keys.treeTraversal();
+		for(int i = 0; i<keys.size(); i++) {
+			vector.push_back({keys[i], temp->data[keys[i]]});
+		}
+		temp = temp->nextNode;
 	}
 	return vector;
 }
