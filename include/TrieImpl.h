@@ -162,3 +162,16 @@ Vector<std::string> Trie::wordsWithPrefix(std::string prefix) {
 	}
 	return vector;
 }
+
+Vector<std::string> Trie::correctiveText(std::string &string) {
+	//emulation of auto correct :)
+	size_t length = string.length();
+	size_t halfWay = length/2;
+	for(;length >= halfWay; --length) {
+		std::string prefix = string.substr(0, length);
+		if(containsStringPrefix(prefix)) {
+			return wordsWithPrefix(prefix);
+		}
+	}
+	return Vector<std::string>{};
+}

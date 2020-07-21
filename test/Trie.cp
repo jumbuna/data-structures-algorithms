@@ -22,7 +22,7 @@ int main() {
 	trie.insert("jog");
 	trie.insert("jumper");
 	
-	trie.removePrefix("jo");
+//	trie.removePrefix("jo");
 	
 //	trie.clear();
 	
@@ -31,9 +31,23 @@ int main() {
 		std::cout << ">>> ";
 		std::cin >> s1;
 		auto p = trie.wordsWithPrefix(s1);
-		for(int i= 0; i < p.size(); i++) {
-			std::cout << p[i] << ", ";
+		if(p.size() != 0) {
+			for(int i= 0; i < p.size(); i++) {
+				std::cout << p[i] << ", ";
+			}
+		}else {
+			std::cout << "No words found matching '" << s1 << "'" << std::endl;
+			//emulate some autocorrect feature :)
+			auto c = trie.correctiveText(s1);
+			if(c.size() > 0) {
+				std::cout << "did you mean?" <<std::endl;
+				for(int i = 0; i < c.size(); i++) {
+					std::cout << c[i] << ", ";
+				}
+			}
+			
 		}
+		
 		std::cout << std::endl;
 //		std::cout << trie.containsFullString(s1) << std::endl;
 	}

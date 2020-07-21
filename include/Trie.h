@@ -29,6 +29,7 @@ public:
 	bool containsFullString(std::string);
 	bool containsStringPrefix(std::string);
 	Vector<std::string> wordsWithPrefix(std::string);
+	Vector<std::string> correctiveText(std::string&);
 	size_t size();
 	void clear();
 };
