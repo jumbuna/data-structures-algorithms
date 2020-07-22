@@ -95,17 +95,11 @@ void Trie::findPrefixEndPoint(std::string &prefix, size_t charIndex, TrieNode *c
 void Trie::constructWord(std::string &prefix, Vector<std::string> &vector, TrieNode *candidate) {
 	if(candidate->EOW) {
 		vector.push_back(prefix);
-		Vector<char> keys = candidate->map.keys();
-		for(int i = 0; i < keys.size(); i++) {
-			std::string newPrefix = prefix + keys[i];
-			constructWord(newPrefix, vector, candidate->map[keys[i]]);
-		}
-	}else {
-		Vector<char> keys = candidate->map.keys();
-		for(int i = 0; i < keys.size(); i++) {
-			std::string newPrefix = prefix + keys[i];
-			constructWord(newPrefix, vector, candidate->map[keys[i]]);
-		}
+	}
+	Vector<char> keys = candidate->map.keys();
+	for(int i = 0; i < keys.size(); i++) {
+		std::string newPrefix = prefix + keys[i];
+		constructWord(newPrefix, vector, candidate->map[keys[i]]);
 	}
 }
 
