@@ -47,24 +47,30 @@ bool Utility<K, V, C, B>::isUnderFlow(Node *candidate, size_t order) {
 
 template<class K , class V, class C, class B>
 BpTreeNode<K, V, C, B>* Utility<K, V, C, B>::successorChild(Node *candidate, K key) {
+	//node's first key compared to key satisfies comparator condition
 	if(C{}(candidate->keys.getSmallestElement(), key)) {
 		return candidate->children.getSmallestElement();
 	}else if(!C{}(candidate->keys.getLargestElement(), key)) {
+		//none of keys in node satisfy comparator condition when compared to the key
 		return candidate->children.getLargestElement();
 	}else {
+		//find the first key in the node which satisfies comparator condition
 		Vector<K> keys = candidate->keys.treeTraversal();
 		Vector<Node*> children = candidate->children.treeTraversal();
 		for(int i = 1; i < keys.size(); i++) {
+			//children[i] = nodes whose keys are less than keys[i]
 			if(C{}(keys[i], key)) {
 				return children[i];
 			}
 		}
 	}
+	//unreachable code
 	return nullptr;
 }
 
 template<class K , class V, class C, class B>
 BpTreeNode<K, V, C, B>* Utility<K, V, C, B>::findInternalKeyNode(Node *candidate, K key) {
+	//follow parent until root node or node with keys is reached
 	if(candidate) {
 		candidate = candidate->parent;
 		while(candidate) {
@@ -79,7 +85,9 @@ BpTreeNode<K, V, C, B>* Utility<K, V, C, B>::findInternalKeyNode(Node *candidate
 
 template<class K , class V, class C, class B>
 void BpTree<K, V, C, B>::insert(Node *candidate, K key, V value) {
+	//first key in tree
 	if(!candidate) {
+		//assign root & first to equal first node
 		root = nodeAllocator.create(nullptr, treeOrder);
 		root->insertData(key, value);
 		firstLeaf = root;
@@ -87,32 +95,43 @@ void BpTree<K, V, C, B>::insert(Node *candidate, K key, V value) {
 	}
 	
 	if(Util::isLeaf(candidate)) {
+		//reached leaf
 		candidate->insertData(key, value);
+		//fix a possible overflowing leaf node 
 		postInsertLeafNode(candidate);
 		return;
 	}else {
+		//internal node on path to leaf node
 		insert(Util::successorChild(candidate, key), key, value);
 	}
-	
+	//fix a possible overflowing internal node
 	postInsertInternalNode(candidate);
 }
 
 template<class K , class V, class C, class B>
 void BpTree<K, V, C, B>::postInsertLeafNode(Node *candidate) {
+	//only when leaf is overflowing
 	if(Util::isOverFlow(candidate, treeOrder)) {
+		//parent of the new nodes to be created
 		Node *parent = candidate->parent ? candidate->parent : candidate;
+		//index of middle key/splitting key index
 		int midian = treeOrder/2;
+		//create new nodes
 		Node *leftChild = nodeAllocator.create(parent, treeOrder);
 		Node *rightChild = nodeAllocator.create(parent, treeOrder);
+		//sorted
 		Vector<K> keys = candidate->keys.treeTraversal();
 		Vector<Node*> children = candidate->children.treeTraversal();
 		for(int i = 0; i < keys.size(); i++) {
 			if(i < midian) {
+				//first half of keys go to the left
 				leftChild->insertData(keys[i], candidate->data[keys[i]]);
 			}else {
+				//rest of keys including the splitting go to the right
 				rightChild->insertData(keys[i], candidate->data[keys[i]]);
 			}
 		}
+		//assign/re-assign leaf node pointers
 		leftChild->nextNode = rightChild;
 		rightChild->previousNode = leftChild;
 		leftChild->previousNode = candidate->previousNode;
@@ -124,47 +143,57 @@ void BpTree<K, V, C, B>::postInsertLeafNode(Node *candidate) {
 			(*candidate->nextNode).previousNode = rightChild;
 		}
 		if(candidate == firstLeaf) {
+			//left becomes new first key
 			firstLeaf = leftChild;
 		}
 		
 		if(parent == candidate) {
-			root = candidate;
+			//candidate is the root node also
+			//remove values since values are only stored in leaf node
 			root->data.~Map();
 			root->children.clear();
 			root->keys.clear();
 			root->keys.insert(keys[midian]);
 			root->children.insert(leftChild);
 			root->children.insert(rightChild);
+			//only for leaf nodes
 			root->nextNode = root->previousNode = nullptr;
 		}else {
+			//push splitting key to parent
 			parent->keys.insert(keys[midian]);
+			//remove old child and add the two new children
 			parent->children.remove(candidate);
-			nodeAllocator.destroy(candidate);
 			parent->children.insert(leftChild);
 			parent->children.insert(rightChild);
+			//free memory
+			nodeAllocator.destroy(candidate);
 		}
 	}
 }
 
 template<class K , class V, class C, class B>
 void BpTree<K, V, C, B>::postInsertInternalNode(Node *candidate) {
+	//only if overflowing
 	if(Util::isOverFlow(candidate, treeOrder)) {
 		Node *parent = candidate->parent ? candidate->parent : candidate;
+		//index of splitting key
 		int midian = treeOrder/2;
 		Node *leftChild = nodeAllocator.create(parent, treeOrder);
 		Node *rightChild = nodeAllocator.create(parent, treeOrder);
 		Vector<K> keys = candidate->keys.treeTraversal();
 		Vector<Node*> children = candidate->children.treeTraversal();
 		for(int i = 0; i < keys.size(); i++) {
+			//keys before splitting key move to the left child
 			if(i < midian) {
 				leftChild->keys.insert(keys[i]);
 			}else if(i > midian) {
+				//keys after move to righ node
 				rightChild->keys.insert(keys[i]);
 			}
 		}
-		
 		for(int i = 0; i < children.size(); i++) {
 			if(i <= midian) {
+				//children before move to left
 				leftChild->children.insert(children[i]);
 				children[i]->parent = leftChild;
 			}else {
@@ -174,13 +203,14 @@ void BpTree<K, V, C, B>::postInsertInternalNode(Node *candidate) {
 		}
 		
 		if(parent == candidate) {
-			root = candidate;
+			//candidate is the root
 			root->children.clear();
 			root->keys.clear();
 			root->keys.insert(keys[midian]);
 			root->children.insert(leftChild);
 			root->children.insert(rightChild);
 		}else {
+			//push splitting key to parent
 			parent->keys.insert(keys[midian]);
 			parent->children.remove(candidate);
 			nodeAllocator.destroy(candidate);
