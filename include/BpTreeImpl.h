@@ -7,34 +7,42 @@ BpTreeNode<K, V, C, B>::BpTreeNode(Node *parent, size_t order)
 
 template<class K, class V, class C, class B>
 bool BpTreeNode<K, V, C, B>::nodePtrComparator::operator()(Node *n1, Node *n2) {
+	//compare the first keys in both nodes 
 	return C{}(n1->keys.getSmallestElement(), n2->keys.getSmallestElement());
 }
 
 template<class K, class V, class C, class B>
 void BpTreeNode<K, V, C, B>::insertData(K key, V value) {
+	//insert key into both the map and the keys Bst
 	keys.insert(key);
 	data[key] = value;
 }
 
 template<class K, class V, class C, class B>
 void BpTreeNode<K, V, C, B>::removeKey(K key) {
+	//remove key from both the map and keys Bst
 	keys.remove(key);
 	data.remove(key);
 }
 
 template<class K ,class V, class C, class B>
 bool Utility<K, V, C, B>::isLeaf(Node *candidate) {
+	//leaf nodes have no children
 	return candidate->children.size() == 0;
+	//also
+//	return candidate->data.size() != 0;
 }
 
 template<class K , class V, class C, class B>
 bool Utility<K, V, C, B>::isOverFlow(Node *candidate, size_t order) {
+	//number of keys equals to tree order
 	return candidate->keys.size() == order;
 }
 
 template<class K , class V, class C, class B>
 bool Utility<K, V, C, B>::isUnderFlow(Node *candidate, size_t order) {
-	return candidate->keys.size() < ceil(order/2.0-1);
+	//number of keys is less than ceil(order/2)-1
+	return candidate->keys.size() < ceil(order/2.0)-1;
 }
 
 template<class K , class V, class C, class B>
