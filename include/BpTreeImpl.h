@@ -226,24 +226,31 @@ void BpTree<K, V, C, B>::remove(Node *candidate, K key) {
 	if(!candidate) {
 		return;
 	}
+	//leaf node with given key found
 	if(candidate->keys.contains(key) && Util::isLeaf(candidate)) {
+		//underflow/empty root is allowed
 		candidate->removeKey(key);
 		if(candidate == root) {
 			return;
 		}
+		//find internal key node if any
 		Node *internalNode = Util::findInternalKeyNode(candidate, key);
+		//balance a possible underflow leaf
 		Node *nn = postRemoveLeafNode(candidate);
 		if(internalNode) {
-			//prevent key re-insertion incase where internal node is parent and key was removed during a merge
+			//prevent key re-insertion incase where internal node is parent and key was removed/replaced during a merge/rotation
 			if(internalNode->keys.contains(key)) {
+				//replace internal key with first key of returned node
 				internalNode->keys.remove(key);
 				internalNode->keys.insert(nn->keys.getSmallestElement());
 			}	
 		}
 		return;
 	}else {
+		//internal node
 		remove(Util::successorChild(candidate, key), key);
 	}
+	//balance a possible underflow internal node
 	postRemoveInternalNode(candidate);
 }
 
@@ -252,64 +259,85 @@ BpTreeNode<K, V, C, B>* BpTree<K, V, C, B>::postRemoveLeafNode(Node *candidate) 
 	if(Util::isUnderFlow(candidate, treeOrder)) {
 		Node *parent = candidate->parent;
 		Vector<K> keys = parent->keys.treeTraversal();
+		//candidate is guaranteed to be amongst the children
 		Vector<Node*> children = parent->children.treeTraversal();
 		return leafNodeRemoveCaseOne(candidate, keys, children);
 	}
+	//return with no change
 	return candidate;
 }
 
 template<class K , class V, class C, class B>
 BpTreeNode<K, V, C, B>* BpTree<K, V, C, B>::leafNodeRemoveCaseOne(Node *candidate, Vector<K> &keys, Vector<Node *> &siblings) {
-	//left sibling check
+	//candidate has left sibling
 	int index = siblings.indexOf(candidate);
+	//first child has no leftchild
 	if(index != 0) {
-		Node *sibling = siblings[index-1];
-		if(sibling->keys.size() > ceil(treeOrder/2.0)-1) {
-			borrowKeyFromLeftLeafNode(candidate, sibling);
+		//left sibling
+		Node *leftSibling = siblings[index-1];
+		//has extra key? i.e more keys than allowed minimum
+		if(leftSibling->keys.size() > ceil(treeOrder/2.0)-1) {
+			borrowKeyFromLeftLeafNode(candidate, leftSibling);
 			Node *parent = candidate->parent;
+			//replace splitting key with the now smallest key in candidate 
 			parent->keys.remove(keys[index-1]);
 			parent->keys.insert(candidate->keys.getSmallestElement());
 			return candidate;
 		}
 	}
+	//couldn't borrow key
 	return leafNodeRemoveCaseTwo(candidate, keys, siblings);
 }
 
 template<class K , class V, class C, class B>
 BpTreeNode<K, V, C, B>* BpTree<K, V, C, B>::leafNodeRemoveCaseTwo(Node *candidate, Vector<K> &keys, Vector<Node *> &siblings) {
+	//candidate has a right child
 	int index = siblings.indexOf(candidate);
+	//last key has no right child
 	if(index != siblings.size()-1) {
 		Node *sibling = siblings[index+1];
+		//has extra keys?
 		if(sibling->keys.size() > ceil(treeOrder/2.0)-1) {
 			borrowKeyFromRightLeafNode(candidate, sibling);
+			//replace splitting key with now smallest key in sibling
 			Node *parent = candidate->parent;
 			parent->keys.remove(keys[index]);
 			parent->keys.insert(sibling->keys.getSmallestElement());
 			return candidate;
 		}
 	}
+	//no siblings can't lend key
 	return leafNodeRemoveCaseThree(candidate, keys, siblings);
 }
 
 template<class K , class V, class C, class B>
 BpTreeNode<K, V, C, B>* BpTree<K, V, C, B>::leafNodeRemoveCaseThree(Node *candidate, Vector<K> &keys, Vector<Node *> &siblings) {
+	//merging happens by moving content of right node to the left node
 	Node *parent = candidate->parent;
 	int index = siblings.indexOf(candidate);
 	if(index == 0) {
+		//take contents of the sibling
 		Node *sibling = siblings[1];
 		mergeLeafNodes(candidate, sibling);
+		//remove sibling&splitting key from parent
 		parent->children.remove(sibling);
 		parent->keys.remove(keys[index]);
+		//free memory
 		nodeAllocator.destroy(sibling);
 		return candidate;
 	}else {
+		//sibling takes candidate content
 		Node *sibling = siblings[index-1];
 		mergeLeafNodes(sibling, candidate);
+		//incase of 3/4-tree where an underflow node can have zero keys
 		if(candidate->keys.size() == 0) {
+			//add splitting key
 			candidate->keys.insert(keys[index-1]);
 		}
+		//remove candidate&splitting key from parent
 		parent->children.remove(candidate);
 		parent->keys.remove(keys[index-1]);
+		//free memory
 		nodeAllocator.destroy(candidate);
 		return sibling;
 	}
@@ -317,24 +345,30 @@ BpTreeNode<K, V, C, B>* BpTree<K, V, C, B>::leafNodeRemoveCaseThree(Node *candid
 
 template<class K , class V, class C, class B>
 void BpTree<K, V, C, B>::borrowKeyFromLeftLeafNode(Node *candidate, Node *sibling) {
+	//get last/largest key from sibling
 	K largestKey = sibling->keys.getLargestElement();
 	candidate->insertData(largestKey, sibling->data[largestKey]);
+	//remove key and its value from the sibling
 	sibling->removeKey(largestKey);
 }
 
 template<class K , class V, class C, class B>
 void BpTree<K, V, C, B>::borrowKeyFromRightLeafNode(Node *candidate, Node *sibling) {
+	//get first/smallest key from sibling
 	K smallestKey = sibling->keys.getSmallestElement();
 	candidate->insertData(smallestKey, sibling->data[smallestKey]);
+	//remove key and its value from the sibling
 	sibling->removeKey(smallestKey);
 }
 
 template<class K , class V, class C, class B>
 void BpTree<K, V, C, B>::mergeLeafNodes(Node *candidate, Node *sibling) {
+	//get all keys/values from the sibling
 	Vector<K> keys = sibling->keys.treeTraversal();
 	for(int i = 0; i < keys.size(); i++) {
 		candidate->insertData(keys[i], sibling->data[keys[i]]);
 	}
+	//maintain leafnodes linked leaf
 	candidate->nextNode = sibling->nextNode;
 	if(sibling->nextNode) {
 		(*sibling->nextNode).previousNode = candidate;
@@ -344,15 +378,20 @@ void BpTree<K, V, C, B>::mergeLeafNodes(Node *candidate, Node *sibling) {
 template<class K , class V, class C, class B>
 void BpTree<K, V, C, B>::postRemoveInternalNode(Node *candidate) {
 	if(!Util::isUnderFlow(candidate, treeOrder)) {
+		//not underflowing
 		return;
 	}
+	//root is allowed to be underflowing
 	if(candidate == root) {
+		//if root has zero keys then its first/only child becomes the new root
 		if(candidate->keys.size() == 0) {
 			root = candidate->children.getSmallestElement();
+			//root has no parent
 			root->parent = nullptr;
 		}
 		return;
 	}
+	//internal node
 	Node *parent = candidate->parent;
 	Vector<K> keys = parent->keys.treeTraversal();
 	Vector<Node*> children = parent->children.treeTraversal();
@@ -361,12 +400,15 @@ void BpTree<K, V, C, B>::postRemoveInternalNode(Node *candidate) {
 
 template<class K , class V, class C, class B>
 void BpTree<K, V, C, B>::internalNodeRemoveCaseOne(Node *candidate, Vector<K> &keys, Vector<Node *> &siblings) {
-	//left sibling check
+	//candidate has a left sibling
 	int index = siblings.indexOf(candidate);
+	//first child has no sibling
 	if(index != 0) {
-		Node *sibling = siblings[index-1];
-		if(sibling->keys.size() > ceil(treeOrder/2.0)-1) {
-			borrowKeyFromLeftInternalNode(candidate, sibling, keys[index-1]);
+		Node *leftSibling = siblings[index-1];
+		//can sibling donate a key?
+		if(leftSibling->keys.size() > ceil(treeOrder/2.0)-1) {
+			//key[index-1] = splitting key
+			borrowKeyFromLeftInternalNode(candidate, leftSibling, keys[index-1]);
 			return;
 		}
 	}
@@ -375,70 +417,94 @@ void BpTree<K, V, C, B>::internalNodeRemoveCaseOne(Node *candidate, Vector<K> &k
 
 template<class K , class V, class C, class B>
 void BpTree<K, V, C, B>::internalNodeRemoveCaseTwo(Node *candidate, Vector<K> &keys, Vector<Node *> &siblings) {
+	//candidate has a right sibling
 	int index = siblings.indexOf(candidate);
+	//last child has no rigrt sibling
 	if(index != siblings.size()-1) {
-		Node *sibling = siblings[index+1];
-		if(sibling->keys.size() > ceil(treeOrder/2.0)-1) {
-			borrowKeyFromRightInternalNode(candidate, sibling, keys[index]);
+		Node *rightSibling = siblings[index+1];
+		//cann sibling donate a key?
+		if(rightSibling->keys.size() > ceil(treeOrder/2.0)-1) {
+			//keys[index] = splitting key
+			borrowKeyFromRightInternalNode(candidate, rightSibling, keys[index]);
 			return;
 		}
 	}
+	//no sibling could donate a key
 	internalNodeRemoveCaseThree(candidate, keys, siblings);
 }
 
 template<class K , class V, class C, class B>
 void BpTree<K, V, C, B>::internalNodeRemoveCaseThree(Node *candidate, Vector<K> &keys, Vector<Node *> &siblings) {
+	//move contents of right node to the left node + splitting key
 	Node *parent = candidate->parent;
 	int index = siblings.indexOf(candidate);
 	if(index == 0) {
 		Node *sibling = siblings[1];
 		mergeInternalNodes(candidate, sibling, keys[0]);
+		//remove sibling&splitting key from parent
 		parent->children.remove(sibling);
 		parent->keys.remove(keys[0]);
+		//free memory
 		nodeAllocator.destroy(sibling);
 	}else {
+		//candidate is to the right
 		Node *sibling = siblings[index-1];
 		mergeInternalNodes(sibling, candidate, keys[index-1]);
+		//incase of a 3/4-tree where a node can have no keys
 		if(candidate->keys.size() == 0) {
+			//add splitting key
 			candidate->keys.insert(keys[index-1]);
 		}
+		//remove candidate/sibling key from parent
 		parent->children.remove(candidate);
 		parent->keys.remove(keys[index-1]);
+		//free memory
 		nodeAllocator.destroy(candidate);
 	}
 }
 
 template<class K , class V, class C, class B>
-void BpTree<K, V, C, B>::borrowKeyFromLeftInternalNode(Node *candidate, Node *sibling, K parentKey) {
+void BpTree<K, V, C, B>::borrowKeyFromLeftInternalNode(Node *candidate, Node *sibling, K splitKey) {
+	//get last key and child from the sibling through the parent
 	Node *parent = candidate->parent;
-	Node *largestChild = sibling->children.getLargestElement();
-	K largestKey = sibling->keys.getLargestElement();
-	candidate->keys.insert(parentKey);
-	parent->keys.remove(parentKey);
-	parent->keys.insert(largestKey);
-	sibling->keys.remove(largestKey);
-	sibling->children.remove(largestChild);
-	candidate->children.insert(largestChild);
-	largestChild->parent = candidate;
+	Node *lastChild = sibling->children.getLargestElement();
+	K lastKey = sibling->keys.getLargestElement();
+	//split key goes to candidate 
+	candidate->keys.insert(splitKey);
+	parent->keys.remove(splitKey);
+	//largest key becomes new split key
+	parent->keys.insert(lastKey);
+	sibling->keys.remove(lastKey);
+	sibling->children.remove(lastChild);
+	//last child goes to candidate
+	candidate->children.insert(lastChild);
+	//re-assign parent of lastChild
+	lastChild->parent = candidate;
 }
 
 template<class K , class V, class C, class B>
-void BpTree<K, V, C, B>::borrowKeyFromRightInternalNode(Node *candidate, Node *sibling, K parentKey) {
+void BpTree<K, V, C, B>::borrowKeyFromRightInternalNode(Node *candidate, Node *sibling, K splitKey) {
+	//get first child and key from the sibling through the parent
 	Node *parent = candidate->parent;
-	Node *smallestChild = sibling->children.getSmallestElement();
-	K smallestKey = sibling->keys.getSmallestElement();
-	candidate->keys.insert(parentKey);
-	parent->keys.remove(parentKey);
-	parent->keys.insert(smallestKey);
-	sibling->keys.remove(smallestKey);
-	sibling->children.remove(smallestChild);
-	candidate->children.insert(smallestChild);
-	smallestChild->parent = candidate;
+	Node *firstChild = sibling->children.getSmallestElement();
+	K firstKey = sibling->keys.getSmallestElement();
+	//move split key to candidate
+	candidate->keys.insert(splitKey);
+	parent->keys.remove(splitKey);
+	//first key becomes new split key
+	parent->keys.insert(firstKey);
+	sibling->keys.remove(firstKey);
+	//firstChild to candidate
+	sibling->children.remove(firstChild);
+	candidate->children.insert(firstChild);
+	//reassign parent
+	firstChild->parent = candidate;
 }
 
 template<class K , class V, class C, class B>
-void BpTree<K, V, C, B>::mergeInternalNodes(Node *candidate, Node *sibling, K parentKey) {
-	candidate->keys.insert(parentKey);
+void BpTree<K, V, C, B>::mergeInternalNodes(Node *candidate, Node *sibling, K splitKey) {
+	//move contents of sibling to candidate + split key
+	candidate->keys.insert(splitKey);
 	Vector<K> keys = sibling->keys.treeTraversal();
 	Vector<Node *> children = sibling->children.treeTraversal();
 	for(int i = 0; i < keys.size(); i++) {
@@ -446,6 +512,7 @@ void BpTree<K, V, C, B>::mergeInternalNodes(Node *candidate, Node *sibling, K pa
 	}
 	for(int i = 0; i < children.size(); i++) {
 		candidate->children.insert(children[i]);
+		//re-assign parent pointers
 		children[i]->parent = candidate;
 	}
 }
@@ -454,6 +521,7 @@ template<class K , class V, class C, class B>
 BpTree<K, V, C, B>::BpTree(size_t order)
 :treeOrder(order), root(nullptr), keyCount(0), firstLeaf(nullptr)
 {
+	//initial memory to hold upto 128 nodes
 	nodeAllocator.numberOfChunks = 128;
 }
 
@@ -477,12 +545,14 @@ bool BpTree<K, V, C, B>::contains(K key) {
 		return false;
 	}
 	Node *temp = root;
+	//search for key in internal nodes
 	while(!Util::isLeaf(temp)) {
 		if(temp->keys.contains(key)) {
 			return true;
 		}
 		temp = Util::successorChild(temp, key);
 	}
+	//key no in internal nodes so might be in leaf
 	return temp->keys.contains(key);
 }
 
@@ -493,6 +563,7 @@ size_t BpTree<K, V, C, B>::size() {
 
 template<class K, class V, class C, class B>
 Vector<K> BpTree<K, V, C, B>::treeTraversal(TraversalOrder order) {
+	//BFS of the Tree
 	Vector<K> vector;
 	if(root == nullptr) {
 		return vector;
@@ -514,10 +585,12 @@ Vector<K> BpTree<K, V, C, B>::treeTraversal(TraversalOrder order) {
 
 template<class K, class V, class C, class B>
 Vector<std::pair<K, V>> BpTree<K, V, C, B>::KeyValuePairs() {
+	//inorder traversal of tree
 	Vector<std::pair<K, V>> vector;
 	if(firstLeaf == nullptr) {
 		return vector;
 	}
+	//since all keys are alse stored in leaves
 	Node *temp = firstLeaf;
 	while(temp) {
 		Vector<K> keys = temp->keys.treeTraversal();
