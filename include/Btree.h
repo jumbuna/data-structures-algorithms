@@ -25,8 +25,6 @@ struct BtreeNode {
 template<class T, class C, class B>
 struct Utility {
 	using Node = BtreeNode<T, C, B>;
-//	static T getBstSmallestElement(BinarySearchTree<T, C> *); 
-//	static T getBstLargestElement(BinarySearchTree<T, C> *);
 	static bool isOverflow(Node *, std::size_t);
 	static bool isUnderflow(Node *, std::size_t);
 	static bool isLeaf(Node *);

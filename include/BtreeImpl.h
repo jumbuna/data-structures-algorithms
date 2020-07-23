@@ -1,17 +1,5 @@
 #include "Btree.h"
 
-//template<class T, class C, class B>
-//T Utility<T, C, B>::getBstSmallestElement(BinarySearchTree<T, C> *tree) {
-//	BstNode<T> *node = BstUtility<T, C, B>::postOrderSuccessor(tree->root, tree->leafSentinel);
-//	return node->element;
-//}
-//
-//template<class T, class C, class B>
-//T Utility<T, C, B>::getBstLargestElement(BinarySearchTree<T, C> *tree) {
-//	BstNode<T> *node = BstUtility<T, C, B>::preOrderSuccessor(tree->root, tree->leafSentinel);
-//	return node->element;
-//}
-
 template<class T, class C, class B>
 T Utility<T, C, B>::preOrderSuccessor(Node *candidate) {
 	while(!isLeaf(candidate)) {
@@ -27,6 +15,7 @@ BtreeNode<T, C, B>::BtreeNode(BtreeNode<T, C, B> *parent, std::size_t order)
 
 template<class T, class C, class B>
 bool BtreeNode<T, C, B>::NodePointerComparator::operator()(BtreeNode<T, C, B> *n1, BtreeNode<T, C, B> *n2) {
+	//compare first keys of given node
 	return C{}(n1->keys.getSmallestElement(), n2->keys.getSmallestElement());
 }
 
