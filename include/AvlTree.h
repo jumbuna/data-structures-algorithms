@@ -8,7 +8,9 @@
 template<class T>
 struct AvlNode: BstNode<T> {
 	AvlNode(T, AvlNode *);
+	//balance the tree
 	int height, balanceFactor;
+	//helper functions to get pointers cast to AvlNode type
 	AvlNode *getLeftChild();
 	AvlNode *getRightChild();
 	AvlNode *getParent();
@@ -18,14 +20,14 @@ template<class T, class C = std::greater<T>>
 class AvlTree: public BinarySearchTree<T, C> {
 	using AvlNode = AvlNode<T>;
 	using Node = BstNode<T>;
+	//allocator
 	Allocator<AvlNode, 128> nodeAllocator;
 	void insert(Node *, Node *, T);
 	void remove(Node *, T);
 	void updateBalanceFactor(AvlNode *);
 	void balance(AvlNode *);
 public:
-	AvlTree();
-	AvlTree(std::size_t);
+	AvlTree(std::size_t = 128);
 	virtual void insert(T) override;
 	virtual void remove(T) override;
 	virtual bool contains(T) override;

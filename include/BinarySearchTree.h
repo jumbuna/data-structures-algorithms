@@ -1,5 +1,7 @@
 #pragma once
 
+//base class for all binary tree
+
 #include "BinarySearchTreeNode.h"
 #include "Vector.h"
 #include "Queue.h"
@@ -11,9 +13,12 @@ class BinarySearchTree {
 public:
 	using Node = BstNode<T>;
 	BinarySearchTree();
+	//pointer to node at top of tree
 	Node *root;
+	//number of nodes in the tree
 	std::size_t nodeCount;
 	C comparator;
+	//value signifying end of the tree
 	Node *leafSentinel;
 	virtual void insert(T) = 0;
 	virtual void remove(T) = 0;
@@ -21,7 +26,9 @@ public:
 	virtual Vector<T> treeTraversal(TraversalOrder = IN_ORDER)=0;
 	virtual std::size_t size() = 0;
 	virtual void clear() = 0;
+	//get element of left's left most node
 	virtual T getSmallestElement();
+	//get element of right's right most node
 	virtual T getLargestElement();
 };
 

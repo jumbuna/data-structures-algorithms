@@ -4,6 +4,7 @@ template<class T>
 AANode<T>::AANode(T element, BstNode<T> *parent)
 :BstNode<T> (element, parent)
 {
+	//leaf nodes have a level of 1 by default
 	level = 1;
 }
 
@@ -23,6 +24,7 @@ AANode<T>* AANode<T>::getParent() {
 
 template<class T, class C>
 bool AATree<T, C>::leftHorizontalLinkExists(aaNode *candidate) {
+	//left-child has same level as parent
 	aaNode *leftChild = candidate->getLeftChild();
 	if(leftChild) {
 		if(leftChild->level == candidate->level) {
@@ -34,6 +36,7 @@ bool AATree<T, C>::leftHorizontalLinkExists(aaNode *candidate) {
 
 template<class T, class C>
 bool AATree<T, C>::rightHorizontalLinkExists(aaNode *candidate) {
+	//right-grandchild has same level as grandparent
 	aaNode *rightChild = candidate->getRightChild();
 	if(rightChild) {
 		aaNode *rightGrandChild = rightChild->getRightChild();
@@ -48,6 +51,7 @@ bool AATree<T, C>::rightHorizontalLinkExists(aaNode *candidate) {
 
 template<class T, class C>
 void AATree<T, C>::split(aaNode *candidate) {
+	//fix a right horizontal link by doing a left rotation abot the parent/rightchild
 	if(rightHorizontalLinkExists(candidate)) {
 		aaNode *rightChild = candidate->getRightChild();
 		BstUtility<T, C>::rightRightCase(rightChild, this);
@@ -57,6 +61,7 @@ void AATree<T, C>::split(aaNode *candidate) {
 
 template<class T, class C>
 void AATree<T, C>::skew(aaNode *candidate) {
+	//fix a left horizontal link by doing a right rotation about the leftchild
 	if(leftHorizontalLinkExists(candidate)) {
 		Node *leftChild = candidate->getLeftChild();
 		BstUtility<T, C>::leftLeftCase(leftChild, this);
@@ -65,11 +70,12 @@ void AATree<T, C>::skew(aaNode *candidate) {
 
 template<class T, class C>
 void AATree<T, C>::insert(Node *candidate, Node *parent, T element) {
+	//first insert sice root is null
 	if(!candidate && !parent) {
 		BinarySearchTree<T, C>::root = nodeAllocator.create(element, parent);
 		return;
 	}
-	
+	//reached insertion point
 	if(!candidate) {
 		if(BinarySearchTree<T, C>::comparator(parent->element, element)) {
 			parent->leftChild = nodeAllocator.create(element, parent);
@@ -78,13 +84,13 @@ void AATree<T, C>::insert(Node *candidate, Node *parent, T element) {
 		}
 		return;
 	}
-	
+	//internal node
 	if(BinarySearchTree<T, C>::comparator(candidate->element, element)) {
 		insert(candidate->leftChild, candidate, element);
 	}else {
 		insert(candidate->rightChild, candidate, element);
 	}
-	
+	//balance the tree
 	skew(static_cast<aaNode*> (candidate));
 	split(static_cast<aaNode*> (candidate));
 }
@@ -92,10 +98,12 @@ void AATree<T, C>::insert(Node *candidate, Node *parent, T element) {
 template<class T, class C>
 void AATree<T, C>::remove(Node *candidate, T element) {
 	if(!candidate) {
+		//executed only when a search is not done before removing begin
 		return;
 	}
 	if(candidate->element == element) {
 		Node *parent = candidate->parent;
+		//leafnode or leftchild only
 		if(!candidate->rightChild) {
 			Node *leftChild = candidate->leftChild;
 			if(parent) {
@@ -110,9 +118,11 @@ void AATree<T, C>::remove(Node *candidate, T element) {
 			if(leftChild) {
 				leftChild->parent = parent;
 			}
+			//free memory
 			nodeAllocator.destroy(static_cast<aaNode*> (candidate));
 			return;
 		}else if(!candidate->leftChild) {
+			//leafnode/ rightchild only
 			Node *rightChild = candidate->rightChild;
 			if(parent) {
 				if(parent->leftChild == candidate) {
@@ -126,21 +136,25 @@ void AATree<T, C>::remove(Node *candidate, T element) {
 			if(rightChild) { 
 				rightChild->parent = parent;
 			}
+			//free memory
 			nodeAllocator.destroy(static_cast<aaNode*> (candidate));
 			return;
 		}else {
+			//internal node
+			//find successor from left side
 			T successor = BstUtility<T, C>::preOrderSuccessor(candidate->leftChild);
 			candidate->element = successor;
 			remove(candidate->leftChild, successor);
 		}
 	}else {
+		//traverse the tree to find the target node
 		if(BinarySearchTree<T, C>::comparator(candidate->element, element)) {
 			remove(candidate->leftChild, element);
 		}else {
 			remove(candidate->rightChild, element);
 		}
 	}
-	
+	//balance the tree
 	updateLevel(static_cast<aaNode*> (candidate));
 	skew(static_cast<aaNode*> (candidate));
 	split(static_cast<aaNode*> (candidate));
@@ -148,6 +162,8 @@ void AATree<T, C>::remove(Node *candidate, T element) {
 
 template<class T, class C>
 void AATree<T, C>::updateLevel(aaNode *candidate) {
+	//if parent is 2 levels higher than any of its children then reduce parents level by 1
+	//if rightchild had same level as parent then also reduce by 1
 	std::size_t leftLevel, rightLevel;
 	leftLevel = rightLevel = 0;
 	if(candidate->leftChild) {
@@ -158,6 +174,11 @@ void AATree<T, C>::updateLevel(aaNode *candidate) {
 	}
 	
 	if(candidate->level - std::min(leftLevel, rightLevel) == 2) {
+		if(candidate->getRightChild()) {
+			if(rightLevel == candidate->level) {
+				(*candidate->getRightChild()).level -= 1;
+			}
+		}
 		candidate->level -= 1;
 	}
 }
@@ -166,6 +187,7 @@ template<class T, class C>
 AATree<T, C>::AATree(std::size_t noOfelements)
 :BinarySearchTree<T, C> ()
 {
+	//allocate exact amount of memory to hold the nodes
 	nodeAllocator.numberOfChunks = noOfelements;
 }
 

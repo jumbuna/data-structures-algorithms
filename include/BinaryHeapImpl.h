@@ -2,6 +2,7 @@
 
 template<class T, class compare>
 void BinaryHeap<T, compare>::swim(std::size_t index) {
+	//recursive
 	int parent = (index-1)/2;
 	if(parent >= 0) {
 		if(comparator(vector[index], vector[parent])) {
@@ -9,6 +10,17 @@ void BinaryHeap<T, compare>::swim(std::size_t index) {
 			swim(parent);
 		}
 	}
+	//iterative
+//	int parent;
+//	while(index > 0) {
+//		parent = (index-1)/2;
+//		if(comparator(vector[index], vector[parent])) {
+//			swap(index, parent);
+//			index = parent;
+//		}else {
+//			break;
+//		}
+//	}
 }
 
 template<class T, class compare>
@@ -36,6 +48,7 @@ void BinaryHeap<T, compare>::swap(std::size_t i, std::size_t j) {
 
 template<class T, class compare>
 void BinaryHeap<T, compare>::insert(T element) {
+	//ignore element if it already exists
 	if(vector.indexOf(element) == -1) {
 		vector.push_back(element);
 		swim(vector.size()-1);
@@ -49,6 +62,7 @@ T BinaryHeap<T, compare>::remove() {
 		throw std::out_of_range("ofr");
 	}
 	T element = vector[0];
+	//replace with element at end of tree
 	vector[0] = vector[vector.size()-1];
 	vector.removeAt(vector.size()-1);
 	sink(0);

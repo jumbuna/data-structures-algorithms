@@ -1,5 +1,9 @@
 #pragma once
 
+//types of traversals
 enum TraversalOrder {
-	IN_ORDER, POST_ORDER, PRE_ORDER, LEVEL_ORDER
+	IN_ORDER,
+	POST_ORDER, //DFS
+	PRE_ORDER,
+	LEVEL_ORDER //BFS
 };

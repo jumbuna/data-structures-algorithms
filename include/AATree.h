@@ -7,7 +7,9 @@
 template<class T>
 struct AANode : BstNode<T> {
 	AANode(T, BstNode<T> *);
+	//used to balance the tree
 	std::size_t level;
+	//helper functions to cast pointer type to that of AANode
 	AANode *getLeftChild();
 	AANode *getRightChild();
 	AANode *getParent();
@@ -17,6 +19,7 @@ template<class T, class C = std::greater<T>>
 class AATree : public BinarySearchTree<T, C> {
 	using Node = BstNode<T>;
 	using aaNode = AANode<T>;
+	//handle construction and destruction of Nodes
 	Allocator<aaNode> nodeAllocator;
 	bool leftHorizontalLinkExists(aaNode *);
 	bool rightHorizontalLinkExists(aaNode *);

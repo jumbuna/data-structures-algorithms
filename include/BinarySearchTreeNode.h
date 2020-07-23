@@ -1,5 +1,7 @@
 #pragma once
 
+//base class for all nodes of a binary tree
+
 template<class T>
 struct BstNode {
 	BstNode();
