@@ -181,14 +181,19 @@ bool Map<K, V>::contains(K key) {
 }
 
 template<class K, class V>
-void Map<K, V>::remove(K key) {
+void Map<K, V>::remove(K key, bool all) {
 	//no removal actually happens
 	//the slot of the key is just omitted during search
 	std::size_t index = indexOf(key);
-	while(index != -1) {
+	if(!all && index != -1) {
 		memoryPool->poolAddress[index].tombstone = true;
 		--nodeCount;
-		index = indexOf(key);
+	} else {
+		while(index != -1) {
+			memoryPool->poolAddress[index].tombstone = true;
+			--nodeCount;
+			index = indexOf(key);
+		}
 	}
 }
 

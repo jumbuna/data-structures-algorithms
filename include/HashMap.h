@@ -52,7 +52,7 @@ public:
 	//check for a given key in the table
 	bool contains(K);
 	//remove access to given key in the table
-	void remove(K);
+	void remove(K, bool=false);
 	//return table to initial state
 	void clear();
 	//return vector containing all the keys
