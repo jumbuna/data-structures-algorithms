@@ -76,8 +76,8 @@ std::size_t Map<K, V>::indexOf(K key) {
 
 
 template<class K, class V>
-Map<K, V>::Map()
-:nodeCount(0), currentCapacity(16)
+Map<K, V>::Map(bool allowDuplicates)
+:nodeCount(0), currentCapacity(16), AllowDuplicates(allowDuplicates)
 {
 	//initial pool
 	memoryPool = new MemoryPool<Node>;
@@ -90,6 +90,7 @@ Map<K, V>::Map(Map<K, V> &other) {
 	currentCapacity = other.currentCapacity;
 	nodeCount = other.nodeCount;
 	threshold = other.threshold;
+	AllowDuplicates = other.AllowDuplicates;
 	memoryPool->numberOfChunks = currentCapacity;
 	memoryPool->allocate();
 	std::memcpy(memoryPool->poolAddress, other.memoryPool->poolAddress, currentCapacity * sizeof(Node));
@@ -116,7 +117,8 @@ void Map<K, V>::insert(K key, V value) {
 		}
 	}
 	//if key is already in table then just update the value
-	if(contains(key)) {
+	//making it multimap by removing the if statement
+	if(contains(key) && !AllowDuplicates) {
 		operator[](key) = value;
 	}else {
 		//find where to place the given key and value in the table taking care of possible key collisions
@@ -148,6 +150,7 @@ void Map<K, V>::insert(std::pair<K, V> kv) {
 
 template<class K, class V>
 V& Map<K, V>::operator[](K key) {
+	//only changes first occurence incase of multiple keys
 	std::size_t index = indexOf(key);
 	if(index != -1) {
 		return memoryPool->poolAddress[index].value;
@@ -182,10 +185,10 @@ void Map<K, V>::remove(K key) {
 	//no removal actually happens
 	//the slot of the key is just omitted during search
 	std::size_t index = indexOf(key);
-	if(index != -1) {
-		//mark the slot as a tombstone
+	while(index != -1) {
 		memoryPool->poolAddress[index].tombstone = true;
 		--nodeCount;
+		index = indexOf(key);
 	}
 }
 

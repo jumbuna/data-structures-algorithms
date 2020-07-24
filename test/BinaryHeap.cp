@@ -2,8 +2,9 @@
 #include <iostream>
 
 int main() {
-	BinaryHeap<int, /*std::greater<int>*/> heap;
+	BinaryHeap<int, std::greater<int>> heap;
 	for(int i = 20; i > 0; i--) {
+		heap.insert(i);
 		heap.insert(i);
 	}
 	

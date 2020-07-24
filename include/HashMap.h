@@ -16,6 +16,8 @@ struct MapNode {
 template<class K, class V>
 class Map {
 	using Node = MapNode<K, V>;
+	//allow duplicateKeys?
+	bool AllowDuplicates;
 	//pool to allocate the table space
 	Pool<Node> *memoryPool;
 	std::size_t nodeCount, currentCapacity, threshold;
@@ -33,7 +35,7 @@ class Map {
 	std::hash<K> hashingObject;
 public:
 	//constructor
-	Map();
+	Map(bool = false);
 	//copy constructor
 	Map(Map<K, V>&);
 	//destructor

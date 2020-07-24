@@ -48,11 +48,12 @@ void BinaryHeap<T, compare>::swap(std::size_t i, std::size_t j) {
 
 template<class T, class compare>
 void BinaryHeap<T, compare>::insert(T element) {
+	//uncomment if statement to ignore duplicate values
 	//ignore element if it already exists
-	if(vector.indexOf(element) == -1) {
+	//if(vector.indexOf(element) == -1) {
 		vector.push_back(element);
 		swim(vector.size()-1);
-	}
+	//}
 }
 
 template<class T, class compare>
