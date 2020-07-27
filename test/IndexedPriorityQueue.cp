@@ -1,4 +1,4 @@
-#include "../include/IndexedPriorityQueue.h"
+#include "../ds/IndexedPriorityQueue.h"
 #include <iostream>
 
 int main() {

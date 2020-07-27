@@ -1,4 +1,4 @@
-#include "../include/UnionFind.h"
+#include "../ds/UnionFind.h"
 #include <iostream>
 
 int main() {

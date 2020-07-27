@@ -1,5 +1,4 @@
-#define __DEBUG
-#include "../include/poolallocator.h"
+#include "../ds/poolallocator.h"
 #include <iostream>
 
 int main() {

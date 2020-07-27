@@ -1,8 +1,8 @@
-#include "../include/AvlTree.h"
-#include "../include/AATree.h"
-#include "../include/SplayTree.h"
-#include "../include/RedBlackTree.h"
-#include "../include/UnbalancedBinarySearchTree.h"
+#include "../ds/AvlTree.h"
+#include "../ds/AATree.h"
+#include "../ds/SplayTree.h"
+#include "../ds/RedBlackTree.h"
+#include "../ds/UnbalancedBinarySearchTree.h"
 #include <iostream>
 
 struct comp {

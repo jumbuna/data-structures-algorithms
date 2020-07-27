@@ -8,9 +8,12 @@ template<class K, class V>
 struct MapNode {
 	//tombstone means node can be used during insertion and is also ignored during rehashing
 	//free means node can be used during insertion
-	bool tombstone = false, free = true;
+	bool tombstone, free;
 	K key;
 	V value;
+	MapNode()
+	:tombstone(false), free(true)
+	{}
 };
 
 template<class K, class V>

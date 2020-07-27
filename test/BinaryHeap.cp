@@ -1,4 +1,4 @@
-#include "../include/BinaryHeap.h"
+#include "../ds/BinaryHeap.h"
 #include <iostream>
 
 int main() {

@@ -110,7 +110,7 @@ void Map<K, V>::insert(K key, V value) {
 		memoryPool->numberOfChunks = currentCapacity;
 		//allocates the actual space for the table
 		memoryPool->allocate();
-		Node node;
+		Node node{};
 		//initialize all table slots to free
 		for(int i = 0; i < currentCapacity; i++) {
 			memoryPool->poolAddress[i] = node;

@@ -1,4 +1,4 @@
-#include "../include/FenwickTree.h"
+#include "../ds/FenwickTree.h"
 #include <iostream>
 
 int main() {

@@ -1,4 +1,4 @@
-#include "../include/RadixTree.h"
+#include "../ds/RadixTree.h"
 #include <iostream>
 
 int main() {

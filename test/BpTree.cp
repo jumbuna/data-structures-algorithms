@@ -1,7 +1,7 @@
-#include "../include/BpTree.h"
-#include "../include/AATree.h"
-#include "../include/AvlTree.h"
-#include "../include/SplayTree.h"
+#include "../ds/BpTree.h"
+#include "../ds/AATree.h"
+#include "../ds/AvlTree.h"
+#include "../ds/SplayTree.h"
 #include <iostream>
 
 int main() {
