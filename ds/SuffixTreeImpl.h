@@ -1,5 +1,7 @@
 #include "SuffixTree.h"
 
+using namespace jumbuna;
+
 SuffixNode* SuffixTree::insert(std::string &suffix, size_t charIndex, SuffixNode *candidate) {
 	if(charIndex == suffix.length()) {
 		return candidate;

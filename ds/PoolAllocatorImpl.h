@@ -1,5 +1,7 @@
 #include "PoolAllocator.h"
 
+using namespace jumbuna;
+
 //constructor -> links a chunk to the next forming the freelist
 template<class T, std::size_t growthsize>
 MemoryPool<T, growthsize>::chunk::chunk(chunk *next)

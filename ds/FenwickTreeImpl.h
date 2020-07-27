@@ -1,5 +1,7 @@
 #include "FenwickTree.h"
 
+using namespace jumbuna;
+
 template<class T>
 T FenwickTree<T>::positionalSum(std::size_t elementPosition) {
 	T sum = 0;

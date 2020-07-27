@@ -1,6 +1,8 @@
 #include "../ds/RadixTree.h"
 #include <iostream>
 
+using namespace jumbuna;
+
 int main() {
 	RadixTree tree;
 	tree.insert("romane");

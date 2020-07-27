@@ -1,5 +1,6 @@
 #include "AATree.h"
 
+namespace jumbuna {
 template<class T>
 AANode<T>::AANode(T element, BstNode<T> *parent)
 :BstNode<T> (element, parent)
@@ -225,4 +226,6 @@ void AATree<T, C>::clear() {
 	nodeAllocator.reset();
 	BinarySearchTree<T, C>::root = nullptr;
 	BinarySearchTree<T, C>::nodeCount = 0;
+}
+
 }

@@ -3,7 +3,7 @@
 
 //quadratic time complexity except for nearly sorted array where the time complexity can be reduced to linear
 //constant space complexity
-
+namespace jumbuna {
 template<class T>
 void insertionSort(T *array, size_t arraySize) {
 	for(int i = 1; i < arraySize; i++) {
@@ -25,4 +25,5 @@ void insertionSort(T *array, size_t arraySize) {
 			}
 		}
 	}
+}
 }

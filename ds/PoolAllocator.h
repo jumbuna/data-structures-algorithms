@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <utility>
 
+namespace jumbuna {
 template<class T>
 class Pool {
 public:
@@ -83,5 +84,6 @@ public:
 	//reset the pool
 	void reset();
 };
+}
 
 #include "PoolAllocatorImpl.h"

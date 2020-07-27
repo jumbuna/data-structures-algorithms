@@ -1,5 +1,7 @@
 #include "BpTree.h"
 
+using namespace jumbuna;
+
 template<class K, class V, class C, class B>
 BpTreeNode<K, V, C, B>::BpTreeNode(Node *parent, size_t order)
 :parent(parent), keys(*keyAllocator.create(order)), children(*childrenAllocator.create(order+1)), previousNode(nullptr), nextNode(nullptr)

@@ -1,6 +1,8 @@
 #include "../ds/Vector.h"
 #include <iostream>
 
+using namespace jumbuna;
+
 int main() {
 	Vector<int> vector{4};
 	vector.push_back(10);

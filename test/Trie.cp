@@ -1,6 +1,8 @@
 #include "../ds/Trie.h"
 #include <iostream>
 
+using namespace jumbuna;
+
 int main() {
 	std::cout.setf(std::ios::boolalpha);
 	Trie trie;

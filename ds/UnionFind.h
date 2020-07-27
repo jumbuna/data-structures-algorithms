@@ -1,6 +1,6 @@
 #pragma once
 
-
+namespace jumbuna {
 class UnionFind {
 	int *array, *connectedElements;
 	int root(int);
@@ -11,5 +11,5 @@ public:
 	void unionize(int, int);
 	bool unionized(int, int);
 };
-
+}
 #include "UnionFindImpl.h"

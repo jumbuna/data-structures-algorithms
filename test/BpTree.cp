@@ -4,6 +4,8 @@
 #include "../ds/SplayTree.h"
 #include <iostream>
 
+using namespace jumbuna;
+
 int main() {
 	BpTree<int, int, std::greater<int>, AvlTree<int>> tree{3};
 	tree.insert(30, 1);

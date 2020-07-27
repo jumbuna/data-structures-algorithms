@@ -4,6 +4,7 @@
 #include "BinarySearchTreeNode.h"
 #include "BinarySearchTreeUtilities.h"
 
+namespace jumbuna {
 template<class T, class C = std::greater<T>>
 class UnbalancedBinarySearchTree: public BinarySearchTree<T, C> {
 	using Node = BstNode<T>;
@@ -20,5 +21,5 @@ public:
 	virtual Vector<T> treeTraversal(TraversalOrder = IN_ORDER) override;
 	virtual void clear() override;
 };
-
+}
 #include "UnbalancedBinarySearchTreeImpl.h"

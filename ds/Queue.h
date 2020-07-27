@@ -2,6 +2,7 @@
 
 #include "SinglyLinkedList.h"
 
+namespace jumbuna {
 template<class T, class A = Allocator<ListNode<T>, 256>>
 class Queue {
 	List<T> list;
@@ -15,5 +16,5 @@ public:
 	bool empty();
 	void clear();	
 };
-
+}
 #include "QueueImpl.h"

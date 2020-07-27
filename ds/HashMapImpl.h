@@ -1,5 +1,6 @@
 #include "HashMap.h"
 
+using namespace jumbuna;
 
 template<class K, class V>
 void Map<K, V>::doubleCapacity() {

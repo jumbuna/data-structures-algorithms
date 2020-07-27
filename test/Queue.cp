@@ -1,6 +1,8 @@
 #include "../ds/Queue.h"
 #include <iostream>
 
+using namespace jumbuna;
+
 int main() {
 	Queue<char> queue;
 	queue.push('a');

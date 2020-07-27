@@ -1,5 +1,7 @@
 #include "RadixTree.h"
 
+using namespace jumbuna;
+
 void RadixTree::insert(std::string &string, size_t charIndex, RadixNode *candidate) {
 	if(charIndex == string.length()) {
 		candidate->EOW = true;

@@ -2,6 +2,7 @@
 
 //base class for all nodes of a binary tree
 
+namespace jumbuna {
 template<class T>
 struct BstNode {
 	BstNode();
@@ -11,6 +12,9 @@ struct BstNode {
 	BstNode *rightChild;
 	BstNode *parent;
 };
+}
+
+using namespace jumbuna;
 
 template<class T>
 BstNode<T>::BstNode()

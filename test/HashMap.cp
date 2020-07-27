@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 
+using namespace jumbuna;
+
 struct person {
 	char gender = 'M';
 	int age = 100;

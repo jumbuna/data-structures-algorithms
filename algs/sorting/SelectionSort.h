@@ -3,6 +3,7 @@
 //quadratic time complexity
 //constant space complexity
 
+namespace jumbuna {
 template<class T>
 void selectionSort(T *array, size_t arraySize) {
 	for(size_t i = 0; i < arraySize; i++) {
@@ -18,4 +19,5 @@ void selectionSort(T *array, size_t arraySize) {
 			array[min] = temp;
 		}
 	}
+}
 }

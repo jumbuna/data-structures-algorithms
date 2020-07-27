@@ -3,6 +3,7 @@
 #include "Vector.h"
 #include <algorithm>
 
+namespace jumbuna {
 template<class T, class compare = std::less<T>>
 class BinaryHeap {
 	Vector<T> vector {128};
@@ -23,4 +24,5 @@ public:
 //	bool empty();
 };
 
+}
 #include "BinaryHeapImpl.h"

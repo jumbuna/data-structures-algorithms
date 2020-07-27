@@ -1,5 +1,7 @@
 #include "Stack.h"
 
+using namespace jumbuna;
+
 template<class T, class A>
 void Stack<T, A>::push(T element) {
 	list.push_front(element);

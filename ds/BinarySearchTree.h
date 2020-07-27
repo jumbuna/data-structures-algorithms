@@ -8,6 +8,7 @@
 #include "BinarySearchTreeTraversals.h"
 #include <algorithm>
 
+namespace jumbuna {
 template<class T, class C = std::greater<T>>
 class BinarySearchTree {
 public:
@@ -53,4 +54,6 @@ T BinarySearchTree<T, C>::getLargestElement() {
 		temp = temp->rightChild;
 	}
 	return temp->element;
+}
+
 }

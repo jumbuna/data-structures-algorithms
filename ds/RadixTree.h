@@ -6,6 +6,7 @@
 #include <string>
 #include <algorithm>
 
+namespace jumbuna {
 struct RadixNode {
 	Map<std::string, RadixNode*> map;
 	bool EOW;
@@ -37,5 +38,6 @@ public:
 	size_t size();
 	void clear();
 };
+}
 
 #include "RadixTreeImpl.h"

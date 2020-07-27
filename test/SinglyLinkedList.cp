@@ -1,6 +1,8 @@
 #include "../ds/SinglyLinkedList.h"
 #include <iostream>
 
+using namespace jumbuna;
+
 int main() {
 	List<int> list;
 	list.push_back(100);

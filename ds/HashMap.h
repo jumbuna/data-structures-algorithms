@@ -4,6 +4,7 @@
 #include "Vector.h"
 #include <utility>
 
+namespace jumbuna {
 template<class K, class V>
 struct MapNode {
 	//tombstone means node can be used during insertion and is also ignored during rehashing
@@ -63,5 +64,6 @@ public:
 	
 	//TODO implement iterators
 };
+}
 
 #include "HashMapImpl.h"

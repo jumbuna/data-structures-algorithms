@@ -1,6 +1,8 @@
 #include "../ds/IndexedPriorityQueue.h"
 #include <iostream>
 
+using namespace jumbuna;
+
 int main() {
 	PriorityQueue<char, int> pq;
 	pq.push('a', 10);

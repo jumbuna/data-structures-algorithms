@@ -3,6 +3,7 @@
 //linear logarithmic time complexity
 //linear space complexity
 
+namespace jumbuna {
 template<class T>
 void merge(T *array, size_t lsaStart, size_t lsaEnd, size_t rsaEnd) {	
 	int ll = lsaEnd-lsaStart+1; //size of left subarray
@@ -53,4 +54,5 @@ void mergeSort(T *array, size_t start, size_t end) {
 		mergeSort(array, midian+1, end);
 		merge(array, start, midian, end);
 	}
+}
 }

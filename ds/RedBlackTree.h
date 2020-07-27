@@ -4,6 +4,7 @@
 #include "BinarySearchTree.h"
 #include "BinarySearchTreeUtilities.h"
 
+namespace jumbuna {
 enum Paint {
 	RED, BLACK
 };
@@ -46,5 +47,5 @@ public:
 	virtual Vector<T> treeTraversal(TraversalOrder = IN_ORDER) override;
 	virtual void clear() override;
 };
-
+}
 #include "RedBlackTreeImpl.h"

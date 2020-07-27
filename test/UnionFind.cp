@@ -1,6 +1,8 @@
 #include "../ds/UnionFind.h"
 #include <iostream>
 
+using namespace jumbuna;
+
 int main() {
 	UnionFind find{20};
 	find.unionize(2, 7);

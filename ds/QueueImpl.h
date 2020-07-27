@@ -1,5 +1,7 @@
 #include "Queue.h"
 
+using namespace jumbuna;
+
 template<class T, class A>
 void Queue<T, A>::push(T element) {
 	list.push_back(element);

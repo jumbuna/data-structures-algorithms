@@ -4,6 +4,7 @@
 //logarithmic space complexity
 //quadratic time complexity in worst case
 
+namespace jumbuna {
 template<class T>
 void quickSort(T *array, int start, int end) {
 	if(start < end) {
@@ -20,4 +21,5 @@ void quickSort(T *array, int start, int end) {
 		quickSort(array, start, pivot-1);
 		quickSort(array, pivot+1, end);
 	}
+}
 }

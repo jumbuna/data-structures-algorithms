@@ -1,5 +1,7 @@
 #include "Btree.h"
 
+using namespace jumbuna;
+
 template<class T, class C, class B>
 T Utility<T, C, B>::preOrderSuccessor(Node *candidate) {
 	while(!isLeaf(candidate)) {

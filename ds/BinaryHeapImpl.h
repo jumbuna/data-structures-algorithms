@@ -1,5 +1,6 @@
 #include "BinaryHeap.h"
 
+namespace jumbuna {
 template<class T, class compare>
 void BinaryHeap<T, compare>::swim(std::size_t index) {
 	//recursive
@@ -78,4 +79,6 @@ bool BinaryHeap<T, compare>::contains(T element) {
 template<class T, class compare>
 std::size_t BinaryHeap<T, compare>::size() {
 	return vector.size();
+}
+
 }

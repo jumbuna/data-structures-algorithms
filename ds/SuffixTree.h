@@ -4,7 +4,7 @@
 #include "HashMap.h"
 #include <string>
 #include <iostream>
-
+namespace jumbuna {
 struct SuffixNode {
 	Map<std::string, SuffixNode *> map;
 	int position = -1;
@@ -25,5 +25,5 @@ public:
 	Vector<int> subStringPositions(std::string);
 //	void print();
 };
-
+}
 #include "SuffixTreeImpl.h"

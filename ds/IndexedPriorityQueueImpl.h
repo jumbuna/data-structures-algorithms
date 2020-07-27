@@ -1,5 +1,7 @@
 #include "IndexedPriorityQueue.h"
 
+using namespace jumbuna;
+
 template<class K, class P, class C>
 void PriorityQueue<K, P, C>::swim(size_t i) {
 	if(i > 0) {

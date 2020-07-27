@@ -1,5 +1,7 @@
 #include "SplayTree.h"
 
+using namespace jumbuna;
+
 template<class T, class C>
 void SplayTree<T, C>::zigCase(Node *candidate) {
 	if(candidate != BinarySearchTree<T, C>::root) {

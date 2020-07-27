@@ -2,7 +2,8 @@
 
 #include "PoolAllocator.h"
 
-//the passed allocator is actually not used
+namespace jumbuna {
+//the passed allocator is actually not used for now
 template<class T, class A = MemoryPool<T>>
 class Vector {
 	//access address of array block
@@ -46,5 +47,5 @@ public:
 	std::size_t currentCapacity();
 	//TODO implement iterators for traversal using specialized for loop
 };
-
+}
 #include "VectorImpl.h"

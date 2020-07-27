@@ -1,6 +1,7 @@
 #include "Vector.h"
 #include <memory>
 
+using namespace jumbuna;
 
 template<class T, class A>
 void Vector<T, A>::newPool() {

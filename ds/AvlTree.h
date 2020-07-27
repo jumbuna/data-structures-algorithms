@@ -5,6 +5,7 @@
 #include "BinarySearchTreeUtilities.h"
 #include <algorithm>
 
+namespace jumbuna {
 template<class T>
 struct AvlNode: BstNode<T> {
 	AvlNode(T, AvlNode *);
@@ -36,4 +37,5 @@ public:
 	virtual void clear() override;
 };
 
+}
 #include "AvlTreeImpl.h"

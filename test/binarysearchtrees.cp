@@ -5,6 +5,8 @@
 #include "../ds/UnbalancedBinarySearchTree.h"
 #include <iostream>
 
+using namespace jumbuna;
+
 struct comp {
 	bool operator()(int x, int y) {
 		std::cout << "called";

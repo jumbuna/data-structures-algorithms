@@ -8,6 +8,7 @@
 #include <cmath>
 #include <algorithm>
 
+namespace jumbuna {
 template<class T, class C, class B>
 struct BtreeNode {
 	using Node = BtreeNode<T, C, B>;
@@ -58,5 +59,7 @@ public:
 	std::size_t size();
 	Vector<T> treeTraversal(TraversalOrder = LEVEL_ORDER);
 };
+
+}
 
 #include "BtreeImpl.h"

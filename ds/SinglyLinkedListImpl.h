@@ -1,5 +1,7 @@
 #include "SinglyLinkedList.h"
 
+using namespace jumbuna;
+
 template<class T>
 ListNode<T>::ListNode(T element)
 :data(element), nextNode(nullptr)

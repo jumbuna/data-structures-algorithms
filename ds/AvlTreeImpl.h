@@ -1,5 +1,6 @@
 #include "AvlTree.h"
 
+namespace jumbuna {
 template<class T>
 AvlNode<T>::AvlNode(T element, AvlNode *parent)
 :BstNode<T>(element, parent)
@@ -201,4 +202,6 @@ void AvlTree<T, C>::clear() {
 	nodeAllocator.reset();
 	BinarySearchTree<T, C>::root = nullptr;
 	BinarySearchTree<T, C>::nodeCount = 0;
+}
+
 }

@@ -4,6 +4,7 @@
 #include "BinarySearchTree.h"
 #include "BinarySearchTreeUtilities.h"
 
+namespace jumbuna {
 template<class T>
 struct AANode : BstNode<T> {
 	AANode(T, BstNode<T> *);
@@ -37,5 +38,7 @@ public:
 	virtual Vector<T> treeTraversal(TraversalOrder = IN_ORDER) override;
 	virtual void clear() override;
 };
+
+}
 
 #include "AATreeImpl.h"

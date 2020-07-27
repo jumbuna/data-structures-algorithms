@@ -1,5 +1,7 @@
 #include "UnionFind.h"
 
+using namespace jumbuna;
+
 int UnionFind::root(int index) {
 	while(index != array[index]) {
 		//path compression

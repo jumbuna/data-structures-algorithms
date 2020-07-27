@@ -1,5 +1,7 @@
 #include "../ds/SuffixTree.h"
 
+using namespace jumbuna;
+
 int main() {
 	SuffixTree tree("aabaacaadaabaaba");
 	auto x = tree.subStringPositions("aa");

@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <cmath>
 
+namespace jumbuna {
 template<class K, class V, class C, class B>
 struct BpTreeNode {
 	using Node = BpTreeNode<K, V, C, B>;
@@ -90,4 +91,5 @@ public:
 	Vector<std::pair<K, V>> KeyValuePairs();
 };
 
+}
 #include "BpTreeImpl.h"

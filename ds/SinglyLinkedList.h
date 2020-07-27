@@ -6,6 +6,7 @@
 
 #include "PoolAllocator.h"
 
+namespace jumbuna {
 template<class T>
 struct ListNode {
 	ListNode *nextNode;
@@ -32,5 +33,6 @@ public:
 	T pop_front();
 	T peek_front();
 };
+}
 
 #include "SinglyLinkedListImpl.h"

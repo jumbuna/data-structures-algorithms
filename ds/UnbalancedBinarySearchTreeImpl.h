@@ -1,5 +1,7 @@
 #include "UnbalancedBinarySearchTree.h"
 
+using namespace jumbuna;
+
 template<class T, class C>
 void UnbalancedBinarySearchTree<T, C>::insert(Node *candidate, Node *parent, T element) {
 	if(!candidate && !parent) {

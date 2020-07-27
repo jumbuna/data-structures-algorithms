@@ -7,7 +7,7 @@
 #include "Queue.h"
 #include "BinarySearchTreeTraversals.h"
 
-
+namespace jumbuna {
 template<class T,class C>
 class BstUtility {
 	using Node = BstNode<T>;
@@ -30,6 +30,9 @@ public:
 	static void rightLeftCase(Node *, BinarySearchTree<T, C> *, Node * = nullptr);
 	static C comparator;
 };
+}
+
+using namespace jumbuna;
 
 //same to that of the tree
 template<class T, class C>

@@ -1,6 +1,8 @@
 #include "../ds/poolallocator.h"
 #include <iostream>
 
+using namespace jumbuna;
+
 int main() {
 	Allocator<long> allocator;
 	

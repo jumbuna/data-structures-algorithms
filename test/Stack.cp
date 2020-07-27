@@ -1,6 +1,8 @@
 #include "../ds/Stack.h"
 #include <iostream>
 
+using namespace jumbuna;
+
 int main() {
 	Stack<char> stack;
 	stack.push('a');

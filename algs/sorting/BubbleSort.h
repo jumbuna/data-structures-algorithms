@@ -3,6 +3,7 @@
 //quadratic time complexity
 //constant space complexity
 
+namespace jumbuna {
 template<class T>
 void bubbleSort(T *array, size_t arraySize) {
 	bool swapped = false;
@@ -21,4 +22,5 @@ void bubbleSort(T *array, size_t arraySize) {
 			break;
 		}
 	}
+}
 }

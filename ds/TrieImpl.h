@@ -1,5 +1,7 @@
 #include "Trie.h"
 
+using namespace jumbuna;
+
 void Trie::insert(std::string &string, size_t charIndex, TrieNode *candidate) {
 	if(charIndex == string.length()) {
 		candidate->EOW = true;

@@ -4,6 +4,7 @@
 #include "HashMap.h"
 #include <string>
 
+namespace jumbuna {
 struct TrieNode {
 	Map<char, TrieNode*> map;
 	bool EOW = false; //end of word
@@ -34,5 +35,5 @@ public:
 	size_t size();
 	void clear();
 };
-
+}
 #include "TrieImpl.h"

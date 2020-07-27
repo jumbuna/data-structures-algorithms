@@ -3,6 +3,7 @@
 #include "HashMap.h"
 #include "Vector.h"
 
+namespace jumbuna {
 template<class K, class P, class C = std::less<P>>
 class PriorityQueue {
 	Map<K, size_t> keyToIndex{true};
@@ -24,5 +25,5 @@ public:
 	void remove(K);
 	size_t size();
 };
-
+}
 #include "IndexedPriorityQueueImpl.h"

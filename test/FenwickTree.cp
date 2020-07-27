@@ -1,6 +1,8 @@
 #include "../ds/FenwickTree.h"
 #include <iostream>
 
+using namespace jumbuna;
+
 int main() {
 	Vector<int> vector;
 //	for(double i = 0; i < 10.0; i += .5) {

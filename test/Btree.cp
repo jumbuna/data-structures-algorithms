@@ -1,6 +1,8 @@
 #include "../ds/Btree.h"
 #include <iostream>
 
+using namespace jumbuna;
+
 int main() {
 	Btree<int> tree{7};
 	for(int i = 1; i < 100; i++) {

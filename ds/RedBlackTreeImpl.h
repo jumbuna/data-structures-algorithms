@@ -1,5 +1,7 @@
 #include "RedBlackTree.h"
 
+using namespace jumbuna;
+
 template<class T>
 RBNode<T>::RBNode(T element, BstNode<T> *parent, BstNode<T> *leafSentinel)
 :BstNode<T> (element, parent, leafSentinel)
