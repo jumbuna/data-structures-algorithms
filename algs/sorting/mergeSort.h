@@ -1,26 +1,27 @@
 #pragma once
 
+//linear logarithmic time complexity
+//linear space complexity
+
 template<class T>
-void merge(T *array, size_t p, size_t q, size_t e) {
-	//p-beginning index/left index
-	//q-left index
-	//e-end index
-	
-	int ll = q-p+1; //size of left subarray
-	int rl = e-q; // size of right subarray
+void merge(T *array, size_t lsaStart, size_t lsaEnd, size_t rsaEnd) {	
+	int ll = lsaEnd-lsaStart+1; //size of left subarray
+	int rl = rsaEnd-lsaEnd; // size of right subarray
 	
 	T lsa[ll]; //left subarray
 	T rsa[rl];//right subarray
 	
 	//filling subarray with there values
 	for(int i = 0; i < ll; i++) {
-		lsa[i] = array[p+i];
+		lsa[i] = array[lsaStart+i];
 	}
 	for(int i = 0; i < rl; i++) {
-		rsa[i] = array[q+i+1];
+		rsa[i] = array[lsaEnd+i+1];
 	}
-	
-	int b = p, l = 0, r = 0;
+	//b - subarray start index on array
+	//l - left subarray index
+	//r - right subarray index
+	int b = lsaStart, l = 0, r = 0;
 	while(l < ll && r < rl) {
 		if(lsa[l] <= rsa[r]) {
 			array[b] = lsa[l];
