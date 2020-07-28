@@ -5,6 +5,7 @@
 #include "../algs/sorting/MergeSort.h"
 #include "../algs/sorting/QuickSort.h"
 #include "../algs/sorting/HeapSort.h"
+#include "../algs/sorting/StoogeSort.h"
 #include <string>
 
 template<class T>
@@ -23,8 +24,9 @@ int main(int argc, char *argv[]) {
 //	jumbuna::insertionSort(array, 5, ::compare);
 //	jumbuna::mergeSort(array, 0, 25, ::compare);
 //	jumbuna::quickSort(array, 0, 25, ::compare);
-	jumbuna::heapSort(array, 26, ::compare);
-	for(int i = 0; i < 26; i++) {
+//	jumbuna::heapSort(array, 26, ::compare);
+	jumbuna::stoogeSort(array, 0, 4, ::compare);
+	for(int i = 0; i < 5; i++) {
 		std::cout << array[i] << ", ";
 	}
 }
