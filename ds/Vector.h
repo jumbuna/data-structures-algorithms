@@ -1,6 +1,7 @@
 #pragma once
 
 #include "PoolAllocator.h"
+#include "../algs/sorting/QuickSort.h"
 
 namespace jumbuna {
 //the passed allocator is actually not used for now
@@ -45,6 +46,8 @@ public:
 	std::size_t size();
 	//get the current capacity of the vector
 	std::size_t currentCapacity();
+	//sort the array
+	void sort();
 	//TODO implement iterators for traversal using specialized for loop
 };
 }

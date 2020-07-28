@@ -6,11 +6,13 @@
 
 namespace jumbuna {
 template<class T>
-void quickSort(T *array, int start, int end) {
+void quickSort(T *array, int start, int end,  bool (*function) (T, T) = [](T i, T j) {
+	return i > j;
+}) {
 	if(start < end) {
 		int pivot = end;
 		for(int i=end-1; i >= start; i--) {
-			if(array[i] > array[pivot]) {
+			if(function(array[i], array[pivot])) {
 				T temp = array[i];
 				array[i] = array[pivot-1];
 				array[pivot-1] = array[pivot];
@@ -18,8 +20,8 @@ void quickSort(T *array, int start, int end) {
 				pivot = pivot-1;
 			}
 		}
-		quickSort(array, start, pivot-1);
-		quickSort(array, pivot+1, end);
+		quickSort(array, start, pivot-1, function);
+		quickSort(array, pivot+1, end, function);
 	}
 }
 }

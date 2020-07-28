@@ -161,3 +161,8 @@ std::size_t Vector<T, A>::currentCapacity() {
 	//get current capacity
 	return capacity;
 }
+
+template<class T, class A>
+void Vector<T, A>::sort() {
+	jumbuna::quickSort(memoryPool->poolAddress, 0, currentIndex-1);
+}
