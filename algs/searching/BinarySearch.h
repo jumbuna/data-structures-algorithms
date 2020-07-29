@@ -1,6 +1,8 @@
 #pragma once
 
 //assumption - array is already sorted
+//logarithmic time complexity
+//constant space complexity
 
 namespace jumbuna {
 template<class T>
