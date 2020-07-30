@@ -9,14 +9,14 @@
 
 namespace jumbuna {
 template<class T>
-int exponentialSearch(T *array, T value, size_t arraySize) {
-	if(array[0] != value) {
-		int i = 1;
-		while(i < arraySize && array[i] <= value) {
+int exponentialSearch(T *array, T value, size_t arraySize, int begin = 0) {
+	if(array[begin] != value) {
+		int i = 1+begin;
+		while(i < arraySize+begin && array[i] <= value) {
 			i *= 2;
 		}
-		return binarySearch(array, value, i/2, i > arraySize ? arraySize : i);
+		return reBinarySearch(array, value, i/2, i > arraySize+begin ? arraySize+begin : i);
 	}
-	return 0;
+	return begin;
 }
 }
