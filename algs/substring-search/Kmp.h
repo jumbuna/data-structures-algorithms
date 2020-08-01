@@ -2,7 +2,6 @@
 
 #include "../../ds/Vector.h"
 #include <string>
-#include <iostream>
 
 //linear space complexity
 //O(m+n) time complexity
@@ -41,11 +40,19 @@ void constructKmpTable(std::string &pattern, KmpTable &table) {
 		if(pattern[j] == pattern[i]) {
 			table.push_back(++i);
 		}else {
-			i = i == 0 ? 0 : table[i-1];
-			if(pattern[i] == pattern[j]) {
-				table.push_back(i+1);
-			}else {
-				table.push_back(i);
+			while(i > 0) {
+				i = table[i-1];
+				if(pattern[i] == pattern[j]) {
+					table.push_back(++i);
+					break;
+				}
+			}
+			if(i == 0) {
+				if(pattern[i] == pattern[j]) {
+					table.push_back(++i);
+				}else {
+					table.push_back(0);
+				}
 			}
 		}
 	}
