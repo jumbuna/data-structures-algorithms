@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../algs/substring-search/Kmp.h"
 #include "../algs/substring-search/Brute.h"
+#include "../algs/substring-search/RabinKarp.h"
 
 using namespace std;
 int main(int argc, char *argv[]) {
@@ -10,7 +11,5 @@ int main(int argc, char *argv[]) {
 	constructKmpTable("acacabacacabacacac", table);
 	std::cout << kmpSubStringSearch("abcxabcdabxabcdabcdabcy", "abcdabcy", table) << std::endl;
 	std::cout << bruteSearch("abcxabcdabxabcdabcdabcy", "abcdabcy") << std::endl;
-	for(int i = 0; i < table.size(); i++) {
-		std::cout << table[i] << ", ";
-	}
+	std::cout << rabinKarp("abcxabcdabxabcdabcdabcy", "abcdabcy") << std::endl;
 }
