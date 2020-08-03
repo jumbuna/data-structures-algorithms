@@ -13,7 +13,7 @@ long subStringHash(std::string &string, int i, int m) {
 	}
 	return hash;
 }
-void rollingHash(long &previousHash, int m, char &old, char &nw) {
+void runningHash(long &previousHash, int m, char &old, char &nw) {
 	previousHash -= old;
 	previousHash /= prime;
 	previousHash += (nw * pow(prime, m-1));
@@ -27,7 +27,7 @@ int rabinKarp(std::string string, std::string pattern) {
 		if(i == 0) {
 			hash = subStringHash(string, 0, patternLength);
 		}else {
-			rollingHash(hash, patternLength, string[i-1], string[i+patternLength-1]);
+			runningHash(hash, patternLength, string[i-1], string[i+patternLength-1]);
 		}
 		if(hash == patternHash) {
 			int j = 0;
