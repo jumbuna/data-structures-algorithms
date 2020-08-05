@@ -30,7 +30,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager">
     <configuration name="dsAlg" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="dsAlg" TARGET_NAME="dsAlg" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="dsAlg" RUN_TARGET_NAME="dsAlg">
@@ -48,6 +48,22 @@
       <screen x="0" y="23" width="1280" height="717" />
     </state>
     <state x="259" y="190" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1280.717@0.23.1280.717" timestamp="1596663602426" />
+    <state width="718" height="376" key="GridCell.Tab.0.bottom" timestamp="1596665654382">
+      <screen x="0" y="23" width="1280" height="728" />
+    </state>
+    <state width="718" height="376" key="GridCell.Tab.0.bottom/0.23.1280.728@0.23.1280.728" timestamp="1596665654382" />
+    <state width="718" height="376" key="GridCell.Tab.0.center" timestamp="1596665654381">
+      <screen x="0" y="23" width="1280" height="728" />
+    </state>
+    <state width="718" height="376" key="GridCell.Tab.0.center/0.23.1280.728@0.23.1280.728" timestamp="1596665654381" />
+    <state width="718" height="376" key="GridCell.Tab.0.left" timestamp="1596665654381">
+      <screen x="0" y="23" width="1280" height="728" />
+    </state>
+    <state width="718" height="376" key="GridCell.Tab.0.left/0.23.1280.728@0.23.1280.728" timestamp="1596665654381" />
+    <state width="718" height="376" key="GridCell.Tab.0.right" timestamp="1596665654382">
+      <screen x="0" y="23" width="1280" height="728" />
+    </state>
+    <state width="718" height="376" key="GridCell.Tab.0.right/0.23.1280.728@0.23.1280.728" timestamp="1596665654382" />
     <state width="640" height="187" key="ImportCMakeProjectWizard.bottomPanel" timestamp="1596663825555">
       <screen x="0" y="23" width="1280" height="717" />
     </state>
@@ -56,5 +72,13 @@
       <screen x="0" y="23" width="1280" height="717" />
     </state>
     <state width="640" height="437" key="ImportCMakeProjectWizard.topPanel/0.23.1280.717@0.23.1280.717" timestamp="1596663825554" />
+    <state x="236" y="29" key="SettingsEditor" timestamp="1596665788744">
+      <screen x="0" y="23" width="1280" height="728" />
+    </state>
+    <state x="236" y="29" key="SettingsEditor/0.23.1280.728@0.23.1280.728" timestamp="1596665788744" />
+    <state x="312" y="181" width="802" height="517" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1596665788965">
+      <screen x="0" y="23" width="1280" height="728" />
+    </state>
+    <state x="312" y="181" width="802" height="517" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.23.1280.728@0.23.1280.728" timestamp="1596665788965" />
   </component>
 </project>
