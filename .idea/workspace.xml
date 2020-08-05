@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="dsAlg" targetName="dsAlg" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="68560c2f-790b-4f57-a713-242e1cfee9cd" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="ProjectId" id="1fhHIHyKXTa8qHuTx4u0meZu6QQ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RunManager">
+    <configuration name="dsAlg" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="dsAlg" TARGET_NAME="dsAlg" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="dsAlg" RUN_TARGET_NAME="dsAlg">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="231" y="29" key="#Plugins" timestamp="1596663664209">
+      <screen x="0" y="23" width="1280" height="717" />
+    </state>
+    <state x="231" y="29" key="#Plugins/0.23.1280.717@0.23.1280.717" timestamp="1596663664209" />
+    <state x="259" y="190" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1596663602426">
+      <screen x="0" y="23" width="1280" height="717" />
+    </state>
+    <state x="259" y="190" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1280.717@0.23.1280.717" timestamp="1596663602426" />
+    <state width="640" height="187" key="ImportCMakeProjectWizard.bottomPanel" timestamp="1596663825555">
+      <screen x="0" y="23" width="1280" height="717" />
+    </state>
+    <state width="640" height="187" key="ImportCMakeProjectWizard.bottomPanel/0.23.1280.717@0.23.1280.717" timestamp="1596663825555" />
+    <state width="640" height="437" key="ImportCMakeProjectWizard.topPanel" timestamp="1596663825554">
+      <screen x="0" y="23" width="1280" height="717" />
+    </state>
+    <state width="640" height="437" key="ImportCMakeProjectWizard.topPanel/0.23.1280.717@0.23.1280.717" timestamp="1596663825554" />
+  </component>
+</project>
