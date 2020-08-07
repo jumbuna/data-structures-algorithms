@@ -13,4 +13,7 @@ include_directories(ds)
 include_directories(src)
 include_directories(test)
 
-add_executable(dsAlg test/substring.cpp)
+add_executable(substring test/substring.cpp)
+add_executable(search test/Searching.cpp)
+add_executable(sort test/sorting.cpp)
+add_executable(main test/main.cpp)

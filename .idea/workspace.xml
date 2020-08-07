@@ -16,11 +16,20 @@
         <item name="GROUP_NODE:github" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="dsAlg" targetName="dsAlg" />
+      <config projectName="dsAlg" targetName="substring" />
+      <config projectName="dsAlg" targetName="main" />
+      <config projectName="dsAlg" targetName="search" />
+      <config projectName="dsAlg" targetName="sort" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -30,48 +39,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="68560c2f-790b-4f57-a713-242e1cfee9cd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CMakeCCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CMakeCXXCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CMakeSystem.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CompilerIdC/a.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CompilerIdCXX/a.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/cmake.check_cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/dsAlg.dir/CXX.includecache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/dsAlg.dir/DependInfo.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/dsAlg.dir/build.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/dsAlg.dir/cmake_clean.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/dsAlg.dir/depend.internal" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/dsAlg.dir/depend.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/dsAlg.dir/flags.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/dsAlg.dir/link.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/dsAlg.dir/progress.make" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/dsAlg.dir/test/Searching.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/dsAlg.dir/test/SuffixTree.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/dsAlg.dir/test/poolallocator.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/dsAlg.dir/test/sorting.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/dsAlg.dir/test/substring.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/dsAlg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/dsAlg.cbp" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Pro.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algs/sorting/BubbleSort.h" beforeDir="false" afterPath="$PROJECT_DIR$/algs/sorting/BubbleSort.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="completionType" value="Builtin" />
+    <option name="clangdEnabled" value="false" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
@@ -86,55 +66,151 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="ObjectiveC" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="language.cpp.clangd" />
   </component>
-  <component name="RunManager">
-    <configuration name="dsAlg" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="dsAlg" TARGET_NAME="dsAlg" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="dsAlg" RUN_TARGET_NAME="dsAlg">
+  <component name="RunManager" selected="CMake Application.main">
+    <configuration name="main" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="dsAlg" TARGET_NAME="main" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="dsAlg" RUN_TARGET_NAME="main">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="search" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="dsAlg" TARGET_NAME="search" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="dsAlg" RUN_TARGET_NAME="search">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="sort" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="dsAlg" TARGET_NAME="sort" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="dsAlg" RUN_TARGET_NAME="sort">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="substring" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="dsAlg" TARGET_NAME="substring" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="dsAlg" RUN_TARGET_NAME="substring">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.main" />
+      <item itemvalue="CMake Application.search" />
+      <item itemvalue="CMake Application.sort" />
+      <item itemvalue="CMake Application.substring" />
+    </list>
   </component>
+  <component name="SpellCheckerSettings" BundledDictionaries="5" BundledDictionary0="jetbrains.dic" BundledDictionary1="doxygen.dic" BundledDictionary2="english.dic" BundledDictionary3="objc.dic" BundledDictionary4="cmake.dic" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="project-level" UseSingleDictionary="true" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="user">
+                    <value>
+                      <list>
+                        <option value="*" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="User">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="*" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added cmake-build-debug to exclude file" />
+    <option name="LAST_COMMIT_MESSAGE" value="added cmake-build-debug to exclude file" />
   </component>
   <component name="WindowStateProjectService">
     <state x="231" y="29" key="#Plugins" timestamp="1596663664209">
       <screen x="0" y="23" width="1280" height="717" />
     </state>
     <state x="231" y="29" key="#Plugins/0.23.1280.717@0.23.1280.717" timestamp="1596663664209" />
+    <state x="104" y="62" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1596700534940">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="104" y="62" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.800@0.0.1280.800" timestamp="1596700534940" />
     <state x="259" y="190" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1596663602426">
       <screen x="0" y="23" width="1280" height="717" />
     </state>
     <state x="259" y="190" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1280.717@0.23.1280.717" timestamp="1596663602426" />
-    <state width="718" height="376" key="GridCell.Tab.0.bottom" timestamp="1596665654382">
+    <state width="1258" height="203" key="GridCell.Tab.0.bottom" timestamp="1596707165440">
       <screen x="0" y="23" width="1280" height="728" />
     </state>
-    <state width="718" height="376" key="GridCell.Tab.0.bottom/0.23.1280.728@0.23.1280.728" timestamp="1596665654382" />
-    <state width="718" height="376" key="GridCell.Tab.0.center" timestamp="1596665654381">
+    <state width="1280" height="270" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1596705972147" />
+    <state width="1258" height="203" key="GridCell.Tab.0.bottom/0.23.1280.728@0.23.1280.728" timestamp="1596707165440" />
+    <state width="1258" height="203" key="GridCell.Tab.0.center" timestamp="1596707165439">
       <screen x="0" y="23" width="1280" height="728" />
     </state>
-    <state width="718" height="376" key="GridCell.Tab.0.center/0.23.1280.728@0.23.1280.728" timestamp="1596665654381" />
-    <state width="718" height="376" key="GridCell.Tab.0.left" timestamp="1596665654381">
+    <state width="1280" height="270" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1596705972145" />
+    <state width="1258" height="203" key="GridCell.Tab.0.center/0.23.1280.728@0.23.1280.728" timestamp="1596707165439" />
+    <state width="1258" height="203" key="GridCell.Tab.0.left" timestamp="1596707165438">
       <screen x="0" y="23" width="1280" height="728" />
     </state>
-    <state width="718" height="376" key="GridCell.Tab.0.left/0.23.1280.728@0.23.1280.728" timestamp="1596665654381" />
-    <state width="718" height="376" key="GridCell.Tab.0.right" timestamp="1596665654382">
+    <state width="1280" height="270" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1596705972134" />
+    <state width="1258" height="203" key="GridCell.Tab.0.left/0.23.1280.728@0.23.1280.728" timestamp="1596707165438" />
+    <state width="1258" height="203" key="GridCell.Tab.0.right" timestamp="1596707165439">
       <screen x="0" y="23" width="1280" height="728" />
     </state>
-    <state width="718" height="376" key="GridCell.Tab.0.right/0.23.1280.728@0.23.1280.728" timestamp="1596665654382" />
+    <state width="1280" height="270" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1596705972146" />
+    <state width="1258" height="203" key="GridCell.Tab.0.right/0.23.1280.728@0.23.1280.728" timestamp="1596707165439" />
+    <state width="1258" height="203" key="GridCell.Tab.1.bottom" timestamp="1596707165442">
+      <screen x="0" y="23" width="1280" height="728" />
+    </state>
+    <state width="1258" height="203" key="GridCell.Tab.1.bottom/0.0.1280.800@0.0.1280.800" timestamp="1596700690420" />
+    <state width="1258" height="203" key="GridCell.Tab.1.bottom/0.23.1280.728@0.23.1280.728" timestamp="1596707165442" />
+    <state width="1258" height="203" key="GridCell.Tab.1.center" timestamp="1596707165441">
+      <screen x="0" y="23" width="1280" height="728" />
+    </state>
+    <state width="1258" height="203" key="GridCell.Tab.1.center/0.0.1280.800@0.0.1280.800" timestamp="1596700690419" />
+    <state width="1258" height="203" key="GridCell.Tab.1.center/0.23.1280.728@0.23.1280.728" timestamp="1596707165441" />
+    <state width="1258" height="203" key="GridCell.Tab.1.left" timestamp="1596707165441">
+      <screen x="0" y="23" width="1280" height="728" />
+    </state>
+    <state width="1258" height="203" key="GridCell.Tab.1.left/0.0.1280.800@0.0.1280.800" timestamp="1596700690418" />
+    <state width="1258" height="203" key="GridCell.Tab.1.left/0.23.1280.728@0.23.1280.728" timestamp="1596707165441" />
+    <state width="1258" height="203" key="GridCell.Tab.1.right" timestamp="1596707165442">
+      <screen x="0" y="23" width="1280" height="728" />
+    </state>
+    <state width="1258" height="203" key="GridCell.Tab.1.right/0.0.1280.800@0.0.1280.800" timestamp="1596700690419" />
+    <state width="1258" height="203" key="GridCell.Tab.1.right/0.23.1280.728@0.23.1280.728" timestamp="1596707165442" />
     <state width="640" height="187" key="ImportCMakeProjectWizard.bottomPanel" timestamp="1596663825555">
       <screen x="0" y="23" width="1280" height="717" />
     </state>
@@ -143,17 +219,45 @@
       <screen x="0" y="23" width="1280" height="717" />
     </state>
     <state width="640" height="437" key="ImportCMakeProjectWizard.topPanel/0.23.1280.717@0.23.1280.717" timestamp="1596663825554" />
-    <state x="236" y="29" key="SettingsEditor" timestamp="1596665788744">
+    <state x="236" y="6" width="990" height="722" key="SettingsEditor" timestamp="1596702219986">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="236" y="6" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1596702219986" />
+    <state x="236" y="29" width="990" height="722" key="SettingsEditor/0.23.1280.728@0.23.1280.728" timestamp="1596700077419" />
+    <state x="302" y="131" key="Vcs.Push.Dialog.v2" timestamp="1596666806577">
       <screen x="0" y="23" width="1280" height="728" />
     </state>
-    <state x="236" y="29" key="SettingsEditor/0.23.1280.728@0.23.1280.728" timestamp="1596665788744" />
+    <state x="302" y="131" key="Vcs.Push.Dialog.v2/0.23.1280.728@0.23.1280.728" timestamp="1596666806577" />
     <state x="312" y="181" width="802" height="517" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1596665788965">
       <screen x="0" y="23" width="1280" height="728" />
     </state>
     <state x="312" y="181" width="802" height="517" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.23.1280.728@0.23.1280.728" timestamp="1596665788965" />
+    <state x="181" y="111" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1596700124642">
+      <screen x="0" y="23" width="1280" height="728" />
+    </state>
+    <state x="181" y="111" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.23.1280.728@0.23.1280.728" timestamp="1596700124642" />
     <state x="216" y="230" key="git4idea.merge.GitPullDialog" timestamp="1596666414159">
       <screen x="0" y="23" width="1280" height="728" />
     </state>
     <state x="216" y="230" key="git4idea.merge.GitPullDialog/0.23.1280.728@0.23.1280.728" timestamp="1596666414159" />
+    <state x="367" y="57" width="670" height="743" key="search.everywhere.popup" timestamp="1596703107203">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="367" y="57" width="670" height="743" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1596703107203" />
+    <state x="367" y="75" width="670" height="676" key="search.everywhere.popup/0.23.1280.728@0.23.1280.728" timestamp="1596667212166" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/test/sorting.cpp</url>
+          <line>25</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint enabled="true" type="CidrExceptionBreakpoint" />
+      </default-breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
